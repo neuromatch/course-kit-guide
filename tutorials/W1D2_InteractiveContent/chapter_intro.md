@@ -12,7 +12,8 @@ By the end of Day 2 you will be able to:
 - Produce interactive Altair visualisations embedded in the book
 - Use ipywidgets for interactive controls
 - Explain why all content is written in Markdown and notebooks are generated
-- Embed lecture videos, slides and feedback widgets that work without a kernel
+- Embed lecture videos, slides (OSF or a PDF in the repo) and feedback widgets that work without a kernel
+- Add instructor-only teaching notes with `{nma-instructor}`
 - Write exercises with solutions and explanations for students and instructors
 - Build scrollytelling pages: a pinned stage of figures, videos and live Python beside scrolling text
 - Work within JupyterLite's package and compute limits

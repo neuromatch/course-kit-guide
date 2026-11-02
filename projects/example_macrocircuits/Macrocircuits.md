@@ -43,8 +43,8 @@ This project explores how we can build a biologically inspired artificial neural
 :::{nma-feedback} project_background
 :::
 
-:::{nma-slides} cz93b
-:title: Project slides
+:::{nma-slides} Project slides
+:osf: cz93b
 :::
 
 ## Project Template

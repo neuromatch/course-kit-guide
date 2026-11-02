@@ -57,7 +57,7 @@ A scrolly page is an ordinary tutorial `.md` file with one extra frontmatter lin
 
 Add `layout: scrolly` to the frontmatter, hide the "On this page" outline (recommended, see below), then put a `{step}` marker wherever a new step starts. A step runs from its marker to the next one. Markers have no body: the content goes **after** the closing fence.
 
-````markdown
+````text
 ---
 title: "Tutorial 2: My topic"
 layout: scrolly
@@ -344,7 +344,7 @@ The **Enable Python** pill at the top of the stage (or any Run button) starts [P
 :::{stage}
 ```yaml
 # myst.yml
-extend: https://cdn.jsdelivr.net/npm/@neuromatch/course-kit@0.1/dist/nma.yml  # the course kit's MyST plugin
+extend: https://cdn.jsdelivr.net/npm/@neuromatch/course-kit@0.3/dist/nma.yml  # the course kit's MyST plugin
 
 nma:
   scrolly:

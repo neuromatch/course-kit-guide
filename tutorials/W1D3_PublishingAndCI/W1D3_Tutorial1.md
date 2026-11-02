@@ -9,8 +9,10 @@ Actions workflows) lives in the **Neuromatch course kit**, a separately
 versioned project, published as `@neuromatch/course-kit` on npm and
 `neuromatch-course-kit` on PyPI. Every course calls the kit's reusable
 workflows instead of carrying its own copy, and picks up kit fixes on its next
-build. The `@v0.1` in the workflow is the only version knob: the newest 0.1.x
-(compatible updates), or an exact tag such as `@v0.1.3` to freeze a finished course.
+build. The `@v0.3` in the workflow is the only version knob: the newest 0.3.x
+(compatible updates), or an exact tag such as `@v0.3.0` to freeze a finished
+course. The kit is still in development, so move to a new minor version on purpose:
+see [Starting a new course](../new_course.md).
 
 A new course gets one workflow from `nma-kit init`, `.github/workflows/course.yml`.
 This book's own copy is included below, so the page always shows what actually runs.
@@ -21,7 +23,7 @@ This book's own copy is included below, so the page always shows what actually r
 
 1. `nma-kit check` validates the content rules: no `.ipynb` files in
    `tutorials/`, every page with code cells has a `kernelspec`, every
-   `{nma-video}`/`{nma-slides}` directive is valid, every exercise has an
+   `{nma-video}`/`{nma-slides}` directive is valid (and every `:path:` PDF exists), every exercise has an
    `{nma-solution}`, and the `nma:` settings in `myst.yml` are well formed.
 2. `nma-kit notebooks --dry-run` checks that every executable page converts.
 3. `nma-kit render-scrolly` runs every scrollytelling page
@@ -37,7 +39,9 @@ the previous one passed:
    adds a Colab/Kaggle badge cell, turns `{nma-video}`/`{nma-slides}` and
    `{nma-feedback}` into notebook cells, and splits `{nma-solution}`/
    `{nma-explanation}` into a student notebook (links) and an instructor
-   notebook (answers inline), plus the solution files.
+   notebook (answers inline), plus the solution files. `{nma-instructor}` notes
+   are dropped, and `{nma-data}` files and `{nma-slides}` PDFs are copied next to
+   the notebooks.
 3. `nma-kit publish-notebooks` pushes `notebooks/` to the separate
    `notebooks-branch`. The branch is created the first time, so a new
    course works on its first push.
@@ -46,7 +50,14 @@ the previous one passed:
 5. `nma-kit prepare-site` adds Colab/Kaggle badges to the executable pages and,
    on pages with exercises, a hidden setup cell so "Run all" doesn't stop at an
    unfinished exercise. This only happens in CI's temporary checkout.
-6. `myst build --html` builds the book, and the next job deploys it to GitHub Pages.
+6. `myst build --html` builds the book, then `nma-kit finalize-site` fixes its
+   `robots.txt` and sitemap, and the next job deploys it to GitHub Pages.
+7. Optionally, the same course is built a second time as the
+   [instructor site](./W1D3_Tutorial4.md) and deployed to Cloudflare Pages.
+
+**On a pull request**, the `preview` job (optional, needs Cloudflare Pages) also
+builds the PR and deploys it to `https://pr-<number>.<project>.pages.dev`, with an
+instructor preview too when the instructor site is on.
 
 Generated notebooks are never committed to `main`, which keeps `main` free of
 generated files and avoids CI commit loops. Videos, slides, solution links and

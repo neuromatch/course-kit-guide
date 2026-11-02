@@ -30,7 +30,7 @@ existing files.
 | File | Purpose |
 |---|---|
 | `myst.yml` | Title, authors, GitHub URL, table of contents, branding. The kit is loaded with `extend:`. |
-| `.github/workflows/course.yml` | Calls the kit's reusable workflows: checks on pull requests, publishing on `main`. |
+| `.github/workflows/course.yml` | Calls the kit's reusable workflows: checks on pull requests, publishing on `main`, and optional PR previews and instructor site. |
 | `tutorials/` | An intro page and one example day with a video, an exercise and a solution. |
 | `projects/` | A stub for the project booklet. |
 | `requirements.txt` | The packages your tutorials import. |
@@ -47,6 +47,8 @@ copy the values from this book's `myst.yml`.
 2. Read the example day, then replace it with your own and update `project.toc`.
 3. Preview with `uv run nma-kit sync-assets && uv run myst start`.
 4. Push to `main`.
+5. Optional: turn on pull request previews and the
+   [instructor site](W1D3_PublishingAndCI/W1D3_Tutorial4.md) (both need Cloudflare Pages).
 
 Use the days of this book as the reference for each feature: writing pages
 ([Week 1 Day 1](W1D1_GettingStarted/chapter_intro.md)), interactive content and
@@ -60,14 +62,14 @@ Your course depends on the kit in three places, and all three follow the same
 release line:
 
 - `extend:` in `myst.yml` (the MyST plugin),
-- `@v0.1` in `.github/workflows/course.yml` (the CI workflows, which also install
+- `@v0.3` in `.github/workflows/course.yml` (the CI workflows, which also install
   the matching `nma-kit`),
 - the `neuromatch-course-kit` package you use locally.
 
-`@v0.1` and `@0.1` mean "the newest 0.1.x", so compatible fixes arrive on your
-next build. Pin an exact version (for example `@v0.1.3`) to freeze a finished
-course. A new minor version can change the rules, so read the kit's release
-notes before moving a course to it.
+`@v0.3` and `@0.3` mean "the newest 0.3.x", so compatible fixes arrive on your
+next build. Pin an exact version (for example `@v0.3.0`) to freeze a finished
+course. The kit is still in development, so a new minor version can change the rules:
+change all three places together and run `nma-kit check`.
 
 ## Where this book fits
 

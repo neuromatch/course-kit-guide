@@ -1,15 +1,15 @@
 version: 1
 # The Neuromatch course kit: adds the MyST plugin ({nma-video}, {nma-solution},
-# editable cells, scrolly pages, ...) and turns on JupyterLite. @0.1 = newest
-# 0.1.x; CI pins it to the exact version of the workflow's kit release.
-extend: https://cdn.jsdelivr.net/npm/@neuromatch/course-kit@0.1/dist/nma.yml
+# editable cells, scrolly pages, ...) and turns on JupyterLite. @0.3 = newest
+# 0.3.x; CI pins it to the exact version of the workflow's kit release.
+extend: https://cdn.jsdelivr.net/npm/@neuromatch/course-kit@0.3/dist/nma.yml
 project:
   title: Neuromatch Course Guide
   authors:
     - name:
         literal: Neuromatch
       github: neuromatch
-  github: https://github.com/neuromatch/course-template
+  github: https://github.com/neuromatch/course-kit-guide
   license:
     code: BSD-3-Clause
     content: CC-BY-4.0
@@ -40,6 +40,7 @@ project:
         - file: tutorials/W1D3_PublishingAndCI/W1D3_Tutorial1.md
         - file: tutorials/W1D3_PublishingAndCI/W1D3_Tutorial2.md
         - file: tutorials/W1D3_PublishingAndCI/W1D3_Tutorial3.md
+        - file: tutorials/W1D3_PublishingAndCI/W1D3_Tutorial4.md
         - file: tutorials/W1D3_PublishingAndCI/W1D3_Bonus.md
         - file: tutorials/W1D3_PublishingAndCI/further_reading.md
     - file: tutorials/W2D1_Examples/chapter_intro.md
@@ -77,6 +78,12 @@ nma:
   #     primary: "#D9480F"
   #   style:
   #     extra: _static/extra.css
+  # Folders inside a day folder for {nma-data} files and {nma-slides} PDFs
+  # (these are the defaults):
+  #   assets:
+  #     data: data
+  #     image: images
+  #     slides: slides
   # {nma-feedback} widgets post here (datatops). This is the guide's own
   # project: a course must use its own, never this one. user_key is a
   # write-only key that is published in every notebook, so it is not a secret.
