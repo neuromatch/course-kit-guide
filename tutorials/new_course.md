@@ -68,16 +68,8 @@ release line:
 
 `@v0.2` and `@0.2` mean "the newest 0.2.x", so compatible fixes arrive on your
 next build. Pin an exact version (for example `@v0.2.1`) to freeze a finished
-course. While the kit is on 0.x, a new minor version (0.1 → 0.2) can change the
-rules, so read the kit's [release notes](https://github.com/neuromatch/course-kit/releases)
-before moving a course to it: change all three places together.
-
-::::{admonition} Moving a course from 0.1 to 0.2
-:class: warning
-`{nma-slides} snv4m` and `:title:` are gone. Write `{nma-slides} Title` with
-`:osf: snv4m`, or point `:path:` at a PDF in the day's `slides/` folder. Run
-`nma-kit check` after the upgrade: it reports every directive that needs the new form.
-::::
+course. The kit is still in development, so a new minor version can change the rules:
+change all three places together and run `nma-kit check`.
 
 ## Where this book fits
 

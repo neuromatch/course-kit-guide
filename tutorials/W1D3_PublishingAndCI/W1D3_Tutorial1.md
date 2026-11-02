@@ -11,8 +11,8 @@ versioned project, published as `@neuromatch/course-kit` on npm and
 workflows instead of carrying its own copy, and picks up kit fixes on its next
 build. The `@v0.2` in the workflow is the only version knob: the newest 0.2.x
 (compatible updates), or an exact tag such as `@v0.2.1` to freeze a finished
-course. A new minor version (0.1 → 0.2) can break things, so you move to it on
-purpose: see [Starting a new course](../new_course.md).
+course. The kit is still in development, so move to a new minor version on purpose:
+see [Starting a new course](../new_course.md).
 
 A new course gets one workflow from `nma-kit init`, `.github/workflows/course.yml`.
 This book's own copy is included below, so the page always shows what actually runs.

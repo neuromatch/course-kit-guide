@@ -4,7 +4,7 @@ title: "Tutorial 4: The Instructor Site"
 
 # Tutorial 4: The Instructor Site
 
-Since kit 0.2 the same course can be published a second time for teaching
+The same course can be published a second time for teaching
 assistants and instructors, at its own address such as
 `instructor.<course domain>`. It is built from the same `.md` files as the
 student site. Nothing is duplicated or maintained by hand.

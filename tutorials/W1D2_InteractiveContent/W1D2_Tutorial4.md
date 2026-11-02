@@ -71,13 +71,6 @@ appear. In Colab, which can't draw a bare PDF, the notebook uses a small PDF.js
 viewer with zoom, fit and page buttons. `nma-kit check` fails on a missing
 file, a path outside `slides/` or a file that isn't a `.pdf`.
 
-:::{admonition} Upgrading from kit 0.1
-:class: warning
-Kit 0.1 wrote `{nma-slides} snv4m` (the OSF id as the argument) and
-`:title:`. Both are gone in 0.2. Write
-`{nma-slides} Title` with `:osf: snv4m`.
-:::
-
 ## Feedback
 
 ````markdown

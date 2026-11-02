@@ -130,7 +130,7 @@ Never write video or slide players as code cells. Use the directives:
 
 - On the site, the course kit's plugin (the kit's `js/src/media/`) renders them as static iframes (tabs for multiple hosts), so they show without starting JupyterLite.
 - In generated notebooks, `nma-kit notebooks` (`nma_kit.media`) replaces them with the standard hidden NMA code cells (ipywidgets Tab / OSF IFrame).
-- Options: `nma-video` takes `:youtube:`, `:bilibili:`, `:osf:` (at least one). `nma-slides` takes `:osf:` (an OSF file id) and/or `:path:` (a PDF in the day's `slides/` folder, relative to the day folder), and its argument is the title (default "Tutorial slides"). With both options the site shows one tab per backend. Kit 0.1's `{nma-slides} <osf id>` and `:title:` are gone (0.2 breaking change).
+- Options: `nma-video` takes `:youtube:`, `:bilibili:`, `:osf:` (at least one). `nma-slides` takes `:osf:` (an OSF file id) and/or `:path:` (a PDF in the day's `slides/` folder, relative to the day folder), and its argument is the title (default "Tutorial slides"). With both options the site shows one tab per backend.
 - `:path:` PDFs are published like `{nma-data}` files: `nma-kit notebooks` copies them to `notebooks/<Day>/slides/`, and the site and notebooks iframe them from the jsDelivr GitHub mirror (public repos only, branch URLs cached ~12 h). A download link is always shown.
 - Put them at the top level of the page (not nested in other directives), with options only and no body.
 - Adding a host is a course kit change: `VIDEO_SOURCES` in both `js/src/media/plugin.mjs` and `nma_kit/media.py`.
@@ -302,7 +302,7 @@ Kit tests run in the kit repo; see its `AGENTS.md`.
 
 ### CI
 
-`.github/workflows/course.yml` calls the kit's reusable workflows at `@v0.2` (newest 0.2.x; use an exact tag like `@v0.2.1` to freeze a course). While the kit is on 0.x, a new minor version can break content: bump the workflow ref, the `extend:` URL and the local package together, then run `nma-kit check`. `prepare-site` pins the `extend:` URL in `myst.yml` to the same exact version on CI, so plugin, assets and CLI come from one release.
+`.github/workflows/course.yml` calls the kit's reusable workflows at `@v0.2` (newest 0.2.x; use an exact tag like `@v0.2.1` to freeze a course). The kit is still in development: when moving to a new minor version, bump the workflow ref, the `extend:` URL and the local package together, then run `nma-kit check`. `prepare-site` pins the `extend:` URL in `myst.yml` to the same exact version on CI, so plugin, assets and CLI come from one release.
 
 - **Pull requests** (`course-check.yml`): `nma-kit check`, `notebooks --dry-run`, `render-scrolly`, `prepare-site`, `myst build --html`. Nothing is published to the live site.
 - **Pull request previews** (`course-preview.yml`, the `preview` job in `course.yml`): builds the PR like a publish, pushes its notebooks to `notebooks-pr-<n>` (every badge and link follows that branch), deploys the site to Cloudflare Pages as `https://pr-<n>.<project>.pages.dev` and keeps one comment with the link. Closing the PR deletes the branch and deployments. Same-repository PRs only. Needs secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` and variable `CLOUDFLARE_PROJECT`; without them the deploy is skipped. With `CLOUDFLARE_INSTRUCTOR_PROJECT` set it also deploys an instructor preview (see "Instructor notes and the instructor site").
