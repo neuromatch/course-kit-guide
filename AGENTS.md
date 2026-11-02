@@ -131,7 +131,7 @@ Never write video or slide players as code cells. Use the directives:
 - On the site, the course kit's plugin (the kit's `js/src/media/`) renders them as static iframes (tabs for multiple hosts), so they show without starting JupyterLite.
 - In generated notebooks, `nma-kit notebooks` (`nma_kit.media`) replaces them with the standard hidden NMA code cells (ipywidgets Tab / OSF IFrame).
 - Options: `nma-video` takes `:youtube:`, `:bilibili:`, `:osf:` (at least one). `nma-slides` takes `:osf:` (an OSF file id) and/or `:path:` (a PDF in the day's `slides/` folder, relative to the day folder), and its argument is the title (default "Tutorial slides"). With both options the site shows one tab per backend.
-- `:path:` PDFs are published like `{nma-data}` files: `nma-kit notebooks` copies them to `notebooks/<Day>/slides/`, and the site and notebooks iframe them from the jsDelivr GitHub mirror (public repos only, branch URLs cached ~12 h). A download link is always shown.
+- `:path:` PDFs are published like `{nma-data}` files, so only pages with a `kernelspec` can use `:path:` (the file is copied when that page's notebook is generated; a static page's PDF never reaches the notebooks branch, and the site then shows "Couldn't find the requested file"): `nma-kit notebooks` copies them to `notebooks/<Day>/slides/`, and the site and notebooks iframe them from the jsDelivr GitHub mirror (public repos only, branch URLs cached ~12 h). A download link is always shown.
 - Put them at the top level of the page (not nested in other directives), with options only and no body.
 - Adding a host is a course kit change: `VIDEO_SOURCES` in both `js/src/media/plugin.mjs` and `nma_kit/media.py`.
 

@@ -1,5 +1,8 @@
 ---
 title: "Tutorial 4: Videos, Slides and Feedback"
+kernelspec:
+  name: python3
+  display_name: Python 3
 ---
 
 # Tutorial 4: Videos, Slides and Feedback
@@ -68,7 +71,9 @@ notebooks branch. The site and the notebooks both show it from there (through
 the jsDelivr mirror of GitHub), so the repository must be public. jsDelivr
 caches a branch for up to about 12 hours, so a changed PDF can take a while to
 appear. In Colab, which can't draw a bare PDF, the notebook uses a small PDF.js
-viewer with zoom, fit and page buttons. `nma-kit check` fails on a missing
+viewer with zoom, fit and page buttons. The PDF is only published with a page that has a
+`kernelspec` (it is copied while that page's notebook is generated), so a
+static page can't use `:path:`. `nma-kit check` fails on a missing
 file, a path outside `slides/` or a file that isn't a `.pdf`.
 
 ## Feedback
