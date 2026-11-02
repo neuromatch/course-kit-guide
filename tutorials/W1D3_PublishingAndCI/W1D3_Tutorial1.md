@@ -9,8 +9,8 @@ Actions workflows) lives in the **Neuromatch course kit**, a separately
 versioned project, published as `@neuromatch/course-kit` on npm and
 `neuromatch-course-kit` on PyPI. Every course calls the kit's reusable
 workflows instead of carrying its own copy, and picks up kit fixes on its next
-build. The `@v0.2` in the workflow is the only version knob: the newest 0.2.x
-(compatible updates), or an exact tag such as `@v0.2.1` to freeze a finished
+build. The `@v0.3` in the workflow is the only version knob: the newest 0.3.x
+(compatible updates), or an exact tag such as `@v0.3.0` to freeze a finished
 course. The kit is still in development, so move to a new minor version on purpose:
 see [Starting a new course](../new_course.md).
 

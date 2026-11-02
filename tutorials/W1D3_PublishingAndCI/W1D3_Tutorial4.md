@@ -94,6 +94,6 @@ site too.
 
 ## Instructor notebooks
 
-These were already generated before 0.2: `notebooks/<Day>/instructor/<Tutorial>.ipynb`
-holds the solutions as code cells. What is new is that the instructor site's
-buttons open them, and that `{nma-instructor}` notes never reach any notebook.
+`notebooks/<Day>/instructor/<Tutorial>.ipynb` holds the solutions as code cells,
+and the instructor site's buttons open them. `{nma-instructor}` notes never reach
+any notebook.

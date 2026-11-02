@@ -19,26 +19,24 @@ MyST has three native ways to include an image, and they all work here. Pick by 
 | `{image}` | You need to control the size or alignment | `:alt:`, `:width:`, `:align:` |
 | `{figure}` | The image needs a caption, a number or a cross-reference | All of the above, plus a caption, `:label:` and `{numref}` |
 
-Local files must be declared once per page with `{nma-data}`, so the kit
-publishes them for the Colab/Kaggle notebooks (a URL needs no declaration):
-
-:::{nma-data}
-image/example_figure.png
-:::
+Just reference a local image by its path; the kit publishes every image a page
+displays for the Colab/Kaggle notebooks automatically, so no declaration is
+needed (you only use `{nma-data}` for files your *code* reads, see
+[W1D2 Tutorial 5](../W1D2_InteractiveContent/W1D2_Tutorial5.md)):
 
 ```markdown
-![An example figure](image/example_figure.png)
+![An example figure](images/example_figure.png)
 ```
 
-![An example figure](image/example_figure.png)
+![An example figure](images/example_figure.png)
 
-```{image} image/example_figure.png
+```{image} images/example_figure.png
 :alt: An example figure, resized
 :width: 30%
 :align: center
 ```
 
-```{figure} image/example_figure.png
+```{figure} images/example_figure.png
 :label: fig-example
 :alt: An example figure used to demonstrate the figure directive
 :width: 60%
@@ -46,7 +44,7 @@ image/example_figure.png
 A figure with a caption and a label. Reference it elsewhere with {numref}`fig-example`.
 ```
 
-The image lives in `image/` next to this page. Paths are relative to the page,
+The image lives in `images/` next to this page. Paths are relative to the page,
 which is also the working directory when the page's code runs.
 
 In the generated notebooks all three forms become an `<img>` that Colab renders,
@@ -61,13 +59,13 @@ Keep a day's files in that day's folder, next to the pages that use them:
 
     tutorials/W1D1_GettingStarted/
       W1D1_Tutorial3.md
-      image/example_figure.png      # figures
+      images/example_figure.png     # figures
       data/                         # small data files (create it when you need it)
 
-- **Beside the page.** With only one or two files, put them directly next to the page. Add `image/` and `data/` once a day has more.
+- **Beside the page.** With only one or two files, put them directly next to the page. Add `images/` and `data/` once a day has more.
 - **Site-wide files** (a custom logo, `extra.css`) go in a root `_static/` folder, which you create when needed (see W1D3 Tutorial 3).
 - **On the site**, relative image paths just work.
-- **In the generated notebooks** (Colab/Kaggle), only files declared with `{nma-data}` are copied to `notebooks-branch`. The kit's folders for declared files are `image/` and `data/` (and `slides/` for `{nma-slides}` PDFs), see [W1D2 Tutorial 5](../W1D2_InteractiveContent/W1D2_Tutorial5.md). For any other file a notebook needs, use an absolute URL: `https://raw.githubusercontent.com/<org>/<repo>/main/tutorials/<Day>/<file>`. In the browser, fetch data files with `pyodide.http.open_url` (see W1D2 Bonus), since Pyodide has no sockets.
+- **In the generated notebooks** (Colab/Kaggle), every image a page displays is copied to `notebooks-branch` automatically (no declaration needed), and the download cell fetches files you declare with `{nma-data}` (the files your code reads). The kit's folders are `images/` and `data/` (and `slides/` for `{nma-slides}` PDFs), see [W1D2 Tutorial 5](../W1D2_InteractiveContent/W1D2_Tutorial5.md). For any other file a notebook needs, use an absolute URL: `https://raw.githubusercontent.com/<org>/<repo>/main/tutorials/<Day>/<file>`. In the browser, fetch data files with `pyodide.http.open_url` (see W1D2 Bonus), since Pyodide has no sockets.
 
 ## Math
 

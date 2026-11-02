@@ -61,7 +61,7 @@ renders as:
 ### PDFs in the repository (`:path:`)
 
 Put the PDF in a `slides/` folder inside the day's folder, like `data/` and
-`image/` (the folder name is `nma.assets.slides`, `slides` by default). The
+`images/` (the folder name is `nma.assets.slides`, `slides` by default). The
 path starts with that folder and ends in `.pdf`: no absolute paths and no `..`.
 The example above uses
 `tutorials/W1D2_InteractiveContent/slides/example_slides.pdf`.

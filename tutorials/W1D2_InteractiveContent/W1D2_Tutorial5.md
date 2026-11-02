@@ -19,25 +19,24 @@ if sys.platform == "emscripten":  # only true in JupyterLite/Pyodide
 
 ## Declaring Data Files
 
-The `{nma-data}` directive tells the course kit which files your tutorial needs:
+The `{nma-data}` directive tells the course kit which files your **code reads** (`np.load`, `open`, ...):
 
 :::{nma-data}
 data/spike_times.npz
 data/neuron_metadata.npz
-image/experimental_setup.png
 :::
 
 This declaration:
 - **In the browser**: embeds files ≤2MB into the page (they load instantly from memory)
 - **In notebooks**: generates a hidden download cell that fetches them from GitHub
 
-Files must live in `data/` or `image/` inside your day's folder (the names come from `nma.assets.data` and `nma.assets.image`). Slide PDFs for `{nma-slides}` work the same way and live in `slides/`; see [Tutorial 4](./W1D2_Tutorial4.md).
+Files must live in `data/` or `images/` inside your day's folder (the names come from `nma.assets.data` and `nma.assets.image`). Slide PDFs for `{nma-slides}` work the same way and live in `slides/`; see [Tutorial 4](./W1D2_Tutorial4.md).
 
 ## Using Images
 
-Images work the same way as data files - declare them in `{nma-data}` and reference them in your content:
+Images a page only **displays** need no declaration - just reference them. The kit publishes every image a page shows for the notebooks automatically, and embeds it for the browser:
 
-```{figure} image/experimental_setup.png
+```{figure} images/experimental_setup.png
 :label: fig-setup
 :alt: Experimental setup schematic
 :width: 80%
@@ -45,7 +44,7 @@ Images work the same way as data files - declare them in `{nma-data}` and refere
 Our experimental pipeline: stimulus presentation, neural recording, and spike train analysis.
 ```
 
-In the browser, the image loads instantly from the embedded data. In generated notebooks, the download cell fetches it from GitHub.
+Only declare an image with `{nma-data}` if your code *reads* it (for example loading a PNG into an array). On the site the figure loads instantly from the embedded data; in generated notebooks the published image is fetched from GitHub.
 
 ## Loading Data
 
@@ -156,9 +155,9 @@ def explore_spikes(neuron, condition):
 
 When adding data and images to your tutorials:
 
-1. **Create `data/` and/or `image/` folders** in your day's directory
+1. **Create `data/` and/or `images/` folders** in your day's directory
 2. **Keep files small** (<2MB total) so they embed in browser pages
-3. **Declare all files** with `{nma-data}` at the top of the tutorial
+3. **Declare the files your code reads** with `{nma-data}` at the top of the tutorial (images you only display need no declaration)
 4. **Reference normally** - images with `{figure}`, data with `np.load()` or similar
 5. **Validate** with `nma-kit check` before committing
 
