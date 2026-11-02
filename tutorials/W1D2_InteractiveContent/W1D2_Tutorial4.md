@@ -36,7 +36,7 @@ renders as:
 
 ## Slides
 
-````markdown
+````text
 :::{nma-slides} Tutorial slides
 :osf: snv4m
 :path: slides/example_slides.pdf
@@ -78,7 +78,7 @@ file, a path outside `slides/` or a file that isn't a `.pdf`.
 
 ## Feedback
 
-````markdown
+````text
 :::{nma-feedback} Linear_Dynamical_Systems_Video
 :::
 ````
