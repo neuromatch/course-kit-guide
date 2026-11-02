@@ -31,7 +31,7 @@ This declaration:
 - **In the browser**: embeds files ≤2MB into the page (they load instantly from memory)
 - **In notebooks**: generates a hidden download cell that fetches them from GitHub
 
-Files must live in `data/` or `image/` inside your day's folder.
+Files must live in `data/` or `image/` inside your day's folder (the names come from `nma.assets.data` and `nma.assets.image`). Slide PDFs for `{nma-slides}` work the same way and live in `slides/`; see [Tutorial 4](./W1D2_Tutorial4.md).
 
 ## Using Images
 

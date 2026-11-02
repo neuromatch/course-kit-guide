@@ -34,17 +34,49 @@ renders as:
 ## Slides
 
 ````markdown
-:::{nma-slides} snv4m
+:::{nma-slides} Tutorial slides
+:osf: snv4m
+:path: slides/example_slides.pdf
 :::
 ````
 
 renders as:
 
-:::{nma-slides} snv4m
+:::{nma-slides} Tutorial slides
+:osf: snv4m
+:path: slides/example_slides.pdf
 :::
 
-The argument is the OSF file id. `:title:` overrides the default heading
-"Tutorial slides".
+- The argument is the title. Leave it out for the default, "Tutorial slides".
+  There is no `:title:` option.
+- `:osf:` is the id of an OSF file. `:path:` is a PDF **inside your repository**,
+  relative to the page's folder. Use either or both. With both, the deck
+  appears in two tabs (OSF, PDF), and with one it appears without tabs.
+- A download link is always shown, because phone browsers often can't display a
+  PDF inside a page.
+
+### PDFs in the repository (`:path:`)
+
+Put the PDF in a `slides/` folder inside the day's folder, like `data/` and
+`image/` (the folder name is `nma.assets.slides`, `slides` by default). The
+path starts with that folder and ends in `.pdf`: no absolute paths and no `..`.
+The example above uses
+`tutorials/W1D2_InteractiveContent/slides/example_slides.pdf`.
+
+`nma-kit notebooks` copies the file to `notebooks/<Day>/slides/` on the
+notebooks branch. The site and the notebooks both show it from there (through
+the jsDelivr mirror of GitHub), so the repository must be public. jsDelivr
+caches a branch for up to about 12 hours, so a changed PDF can take a while to
+appear. In Colab, which can't draw a bare PDF, the notebook uses a small PDF.js
+viewer with zoom, fit and page buttons. `nma-kit check` fails on a missing
+file, a path outside `slides/` or a file that isn't a `.pdf`.
+
+:::{admonition} Upgrading from kit 0.1
+:class: warning
+Kit 0.1 wrote `{nma-slides} snv4m` (the OSF id as the argument) and
+`:title:`. Both are gone in 0.2. Write
+`{nma-slides} Title` with `:osf: snv4m`.
+:::
 
 ## Feedback
 
@@ -82,6 +114,26 @@ datatops project that the Neuromatch notebooks already use.
   it isn't a secret. A course that wants its own datatops project changes
   these three values.
 
+## Instructor notes
+
+Teaching notes (timing, common mistakes, what to say) go in `{nma-instructor}`.
+The body is Markdown:
+
+````markdown
+:::{nma-instructor}
+Allow about 10 minutes here. Students often forget the sign of the drift term.
+:::
+````
+
+On the student site and in every generated notebook the note is removed. On the
+[instructor site](../W1D3_PublishingAndCI/W1D3_Tutorial3.md) it appears as an
+"Instructor notes" box. Like the other directives it sits at the top level of the page.
+
+:::{nma-instructor}
+This note is only visible on the instructor site. The student site and the
+notebooks never contain it.
+:::
+
 ## Rules
 
 - Put the directives at the top level of the page, not inside another
@@ -95,7 +147,7 @@ datatops project that the Neuromatch notebooks already use.
 `nma-kit notebooks` replaces each directive with a hidden code
 cell (`cellView: form`, `hide-input`). For videos, that cell builds the
 YouTube/Bilibili `ipywidgets` Tab used in all Neuromatch notebooks. For
-slides, it shows an OSF `IFrame` and prints the download link. For feedback,
+slides, it shows the OSF and PDF decks in tabs and prints the download links. For feedback,
 it is the usual `# @title Submit your feedback` / `content_review(...)` cell,
 and one hidden "Import feedback gadget" cell at the top of the notebook
 installs `vibecheck` and sets `feedback_prefix`.
@@ -120,7 +172,7 @@ class.
 
 Replace each `# @title Video …` cell with an `{nma-video}`, copying the ids
 from its `video_ids = [...]` line. Replace the `# @title Tutorial slides`
-cell with `{nma-slides}`, using its `link_id`. Replace each "Submit your
+cell with `{nma-slides}`, using its `link_id` as `:osf:`. Replace each "Submit your
 feedback" cell with `{nma-feedback}`, using the part of
 `content_review(f"{feedback_prefix}_…")` after the underscore, and delete the
 "Import feedback gadget" cell. Set `feedback_prefix` in the frontmatter if the

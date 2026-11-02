@@ -13,13 +13,14 @@ student fills them in. Their answers go in two MyST directives:
 - `{nma-solution}` for the code that solves an exercise
 - `{nma-explanation}` for the answer to a discussion question or interactive demo
 
-You write each answer once, and the build produces three versions of the page.
+You write each answer once, and the build produces four versions of the page.
 
 | Where | What readers see |
 |---|---|
 | Website | A *Click for solution* / *Click for explanation* link. The answer is not shown on the page. |
 | Student notebook (Colab/Kaggle) | The same link, in its own markdown cell. The `.ipynb` holds no answers. |
 | Instructor notebook | The solution as a code cell (starting `# Solution`) and the explanation as markdown. |
+| Instructor site (optional) | The solution and explanation inline, in collapsed boxes. See [W1D3 Tutorial 4](../W1D3_PublishingAndCI/W1D3_Tutorial4.md). |
 
 The links point to files that CI writes next to the notebooks on
 `notebooks-branch`:

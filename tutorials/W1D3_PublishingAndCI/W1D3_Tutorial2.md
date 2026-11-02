@@ -31,7 +31,8 @@ Badges are added at build time in two places, and never committed to `main`.
 3. Inserts a markdown cell at position 0 containing Colab and Kaggle badge HTML
 4. Writes the result to `notebooks/<day_folder>/<tutorial_name>.ipynb`, and the
    instructor version to `notebooks/<day_folder>/instructor/<tutorial_name>.ipynb`
-   (see Day 2, Tutorial 5)
+   (see Day 2, Tutorial 5). `{nma-data}` files and `{nma-slides}` PDFs are copied
+   into the same day folder under `notebooks/`.
 
 **On the rendered site**, CI runs `nma-kit prepare-site` right before
 `myst build`. This adds

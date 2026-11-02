@@ -344,7 +344,7 @@ The **Enable Python** pill at the top of the stage (or any Run button) starts [P
 :::{stage}
 ```yaml
 # myst.yml
-extend: https://cdn.jsdelivr.net/npm/@neuromatch/course-kit@0.1/dist/nma.yml  # the course kit's MyST plugin
+extend: https://cdn.jsdelivr.net/npm/@neuromatch/course-kit@0.2/dist/nma.yml  # the course kit's MyST plugin
 
 nma:
   scrolly:

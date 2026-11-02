@@ -19,7 +19,7 @@ uv run nma-kit init --title "My Course" --author "Your Name" \
 The result is a small starter (`myst.yml`, the CI workflow, one example day, a
 setup checklist) with no history and no link to this repo. The CI logic, the
 MyST plugin and the `nma-kit` CLI all come from the kit, so your course gets
-fixes through the version in `course.yml` (`@v0.1`) and `extend:` in `myst.yml`.
+fixes through the version in `course.yml` (`@v0.2`) and `extend:` in `myst.yml`.
 See ["Starting a new course"](https://neuromatch.github.io/course-template/tutorials/new_course)
 for the full walkthrough.
 
@@ -32,8 +32,8 @@ is also a working example:
 |---|---|
 | `tutorials/intro.md`, `tutorials/new_course.md` | Orientation and how to start a course |
 | `W1D1` Getting Started | MyST writing, TOC, rich outputs, page types |
-| `W1D2` Interactive Content | In-browser Python, widgets, videos, exercises, scrollytelling |
-| `W1D3` Publishing and CI | The workflow, notebooks and badges, branding |
+| `W1D2` Interactive Content | In-browser Python, widgets, data, videos, slides, exercises, instructor notes, scrollytelling |
+| `W1D3` Publishing and CI | The workflow, notebooks and badges, branding, the instructor site |
 | `W2D1` Examples | A real NMA tutorial, as a normal page and as a scrolly page |
 | `projects/` | Project booklet pages: guidance, a NeuroAI project, a dataset guide |
 
