@@ -3,7 +3,7 @@
 The manual and showcase for building a course with [MyST](https://mystmd.org)
 (JupyterBook 2) and the [Neuromatch course kit](https://github.com/neuromatch/course-kit).
 
-**Live book:** https://neuromatch.github.io/course-template/
+**Live book:** https://neuromatch.github.io/course-kit-guide/
 
 ## Starting a course
 
@@ -20,7 +20,7 @@ The result is a small starter (`myst.yml`, the CI workflow, one example day, a
 setup checklist) with no history and no link to this repo. The CI logic, the
 MyST plugin and the `nma-kit` CLI all come from the kit, so your course gets
 fixes through the version in `course.yml` (`@v0.2`) and `extend:` in `myst.yml`.
-See ["Starting a new course"](https://neuromatch.github.io/course-template/tutorials/new_course)
+See ["Starting a new course"](https://neuromatch.github.io/course-kit-guide/tutorials/new_course)
 for the full walkthrough.
 
 ## What this repository is

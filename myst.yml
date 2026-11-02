@@ -9,7 +9,7 @@ project:
     - name:
         literal: Neuromatch
       github: neuromatch
-  github: https://github.com/neuromatch/course-template
+  github: https://github.com/neuromatch/course-kit-guide
   license:
     code: BSD-3-Clause
     content: CC-BY-4.0
