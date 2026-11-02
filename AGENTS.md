@@ -332,7 +332,7 @@ Micropip fetches wheels from URLs in the browser. **GitHub Releases URLs are NOT
 
 Pre-built wheels live in `_wheels/` and are served via:
 ```
-https://raw.githubusercontent.com/neuromatch/course-template/main/_wheels/<package>.whl
+https://raw.githubusercontent.com/neuromatch/course-kit-guide/main/_wheels/<package>.whl
 ```
 
 This is a temporary workaround. Once upstream maintainers publish wheels to PyPI, remove the URL workaround and install by package name.
