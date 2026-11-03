@@ -47,6 +47,23 @@ if [ -z "${SKIP_STALE:-}" ]; then
     hits=$(printf '%s\n' "$hits" | grep -vFf <(sed 's/:/ /;s/ .*//' "$allow") || true)
   fi
   if [ -n "$hits" ]; then printf '%s\n' "$hits" | head -40; echo "FAILED: stale names"; fail=1; fi
+
+  say "relative links"
+  python3 - <<'PY' || fail=1
+import os, re, sys, pathlib
+bad = []
+for f in pathlib.Path("guide").rglob("*.md"):
+    text = f.read_text()
+    text = re.sub(r"^(````*|~~~+).*?^\1\s*$", "", text, flags=re.S | re.M)  # skip fenced examples
+    for m in re.finditer(r"\]\(([^)\s#]+\.md)(#[^)\s]*)?\)", text):
+        tgt = m.group(1)
+        if re.match(r"[a-z]+:", tgt):
+            continue
+        if not (f.parent / tgt).resolve().exists():
+            bad.append(f"{f}: {tgt}")
+print("\n".join(bad))
+sys.exit(1 if bad else 0)
+PY
 fi
 
 say "result"; [ $fail -eq 0 ] && echo GREEN || echo RED

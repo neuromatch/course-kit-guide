@@ -33,20 +33,7 @@ Day 3, Tutorial 2 for the details of notebook generation and badges.
 
 ## Rules enforced by CI
 
-`nma-kit check` runs in CI and fails the build if either rule
-is broken:
-
-1. **No `.ipynb` files in `tutorials/`.** Content must be `.md`.
-2. **Pages with code need a `kernelspec`.** If a page contains a
-   `` ```{code-cell} `` block, its frontmatter must declare:
-
-   ```yaml
-   kernelspec:
-     name: python3
-     display_name: Python 3
-   ```
-
-   Without it the page would get no notebook, no badges, and no editable cells. Pages without code cells (intros, further reading) stay static.
+`nma-kit check` runs in CI and fails the build on any violation: no `.ipynb` files in the content folders, pages with code need a `kernelspec`, exercises need solutions, and more. The full list is in [Rules enforced by `check`](../reference/check-rules.md).
 
 ## Bringing in an existing notebook
 

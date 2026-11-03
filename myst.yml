@@ -44,6 +44,9 @@ project:
       children:
         - file: guide/reference/directives.md
         - file: guide/reference/frontmatter.md
+        - file: guide/reference/nma-config.md
+        - file: guide/reference/cli.md
+        - file: guide/reference/check-rules.md
         - file: guide/reference/browser-limits.md
         - file: guide/reference/further-reading.md
     - file: guide/examples/index.md
