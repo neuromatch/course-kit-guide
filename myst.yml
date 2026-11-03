@@ -4,7 +4,7 @@ version: 1
 # 0.4.x; CI pins it to the exact version of the workflow's kit release.
 extend: https://cdn.jsdelivr.net/npm/@neuromatch/course-kit@0.4/dist/nma.yml
 project:
-  title: Neuromatch Course Guide
+  title: Neuromatch Course Kit Guide
   authors:
     - name:
         literal: Neuromatch
@@ -85,7 +85,7 @@ site:
   template: book-theme
   options:
     folders: true
-    logo_text: Neuromatch Course Guide   # a course puts its own name here
+    logo_text: Neuromatch Course Kit Guide   # a course puts its own name here
     # The kit's branding (stylesheet, Rubik font, logos, favicon), written to
     # _nma/ by `nma-kit sync-assets` (CI runs it for you; the folder is not committed).
     style: _nma/site.css

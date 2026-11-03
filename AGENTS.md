@@ -4,7 +4,7 @@ Context for AI agents working on this repository.
 
 ## Project Overview
 
-Neuromatch Course Guide: the manual and showcase for building a course with MyST (Markedly Structured Text). MyST `.md` files in `guide/` are the single source of truth. Jupyter notebooks (`.ipynb`) are generated artifacts, never authored directly. The rendered book deploys to GitHub Pages via CI.
+Neuromatch Course Kit Guide: the manual and showcase for building a course with MyST (Markedly Structured Text). MyST `.md` files in `guide/` are the single source of truth. Jupyter notebooks (`.ipynb`) are generated artifacts, never authored directly. The rendered book deploys to GitHub Pages via CI.
 
 The tooling (MyST plugin, `nma-kit` CLI, CI workflows) is the published **Neuromatch course kit** ([neuromatch/course-kit](https://github.com/neuromatch/course-kit)): npm `@neuromatch/course-kit` and PyPI `neuromatch-course-kit`. **This repo contains no kit code.** It holds content, configuration and authoring documentation only; fix kit behaviour in the kit repo, not here.
 

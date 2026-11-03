@@ -1,8 +1,8 @@
 ---
-title: "Welcome to the Neuromatch Course Guide"
+title: "Welcome to the Neuromatch Course Kit Guide"
 ---
 
-# Welcome to the Neuromatch Course Guide
+# Welcome to the Neuromatch Course Kit Guide
 
 The manual for the Neuromatch course kit, and a working example of a course built with it. Every page demonstrates what it explains, and most show **what you write** next to **what you get**.
 

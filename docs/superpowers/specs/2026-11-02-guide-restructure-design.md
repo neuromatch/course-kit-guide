@@ -1,4 +1,4 @@
-# Course Guide restructure: design
+# Course Kit Guide restructure: design
 
 Status: draft, updated for course kit 0.4.0. Date: 2026-11-02.
 

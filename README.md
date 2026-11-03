@@ -1,4 +1,4 @@
-# Neuromatch Course Guide
+# Neuromatch Course Kit Guide
 
 The manual and showcase for building a course with [MyST](https://mystmd.org)
 (JupyterBook 2) and the [Neuromatch course kit](https://github.com/neuromatch/course-kit).
