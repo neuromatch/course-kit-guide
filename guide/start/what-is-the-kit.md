@@ -37,14 +37,4 @@ Day 3, Tutorial 2 for the details of notebook generation and badges.
 
 ## Bringing in an existing notebook
 
-If you receive a `.ipynb`, from an older course or a collaborator, convert it once
-and delete the original:
-
-```bash
-uv run jupytext --to md:myst path/to/Notebook.ipynb -o tutorials/W2D1_MyTopic/W2D1_Tutorial1.md
-```
-
-Then tidy up the result: clean frontmatter, cell tags such as `hide-input`,
-`{nma-solution}`/`{nma-explanation}` directives instead of `# to_remove` cells
-(see Tutorial 5), and KaTeX-compatible math. The full checklist is in `AGENTS.md` under
-"Converting .ipynb to MyST .md". Commit only the `.md`.
+If you receive a `.ipynb`, convert it once to Markdown and delete the original. The steps are in [Convert an existing notebook](../author/convert-a-notebook.md).

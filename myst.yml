@@ -33,6 +33,7 @@ project:
         - file: guide/author/feedback.md
         - file: guide/author/instructor-notes.md
         - file: guide/author/scrolly.md
+        - file: guide/author/convert-a-notebook.md
         - file: guide/author/more-myst.md
         - file: guide/author/fix-a-failing-check.md
     - file: guide/maintainer/index.md

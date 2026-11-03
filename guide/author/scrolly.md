@@ -9,7 +9,7 @@ kernelspec:
 feedback_prefix: W1D2_T7
 ---
 
-This page is itself a scrollytelling page. Each card explains one feature and shows its syntax, and the stage next to it shows that feature working. [W2D1 Tutorial 2](../examples/lds/scrolly-page.md) is a full tutorial built this way.
+This page is itself a scrollytelling page. Each card explains one feature and shows its syntax, and the stage next to it shows that feature working. [Linear dynamical systems (scrolly page)](../examples/lds/scrolly-page.md) is a full tutorial built this way. For the source, open the Markdown file of this page: it is its own example.
 
 ```{code-cell} python
 :tags: [remove-cell]
@@ -23,11 +23,11 @@ rng = np.random.default_rng(2026)
 :::{step} hero
 :kicker: neuromatch course kit
 :::
-# Tutorial 7: *Scrollytelling pages*
+# *Scrollytelling pages*
 
 A pinned stage of figures, videos and live Python, with text cards that scroll past.
 
-**Time:** about 20 minutes
+For: author
 
 :::{step}
 :section: Basics
@@ -60,7 +60,7 @@ Add `layout: scrolly` to the frontmatter, hide the "On this page" outline (recom
 
 ````text
 ---
-title: "Tutorial 2: My topic"
+title: "My topic"
 layout: scrolly
 site:
   hide_outline: true
@@ -276,7 +276,7 @@ def _demo(freq, shape):
 :::
 ## Exercises, solutions and explanations
 
-These work exactly as in [Tutorial 5](images-and-data.md): an untagged exercise cell, directly followed by an `{nma-solution}`. The card gets the *Click for solution* link.
+These work exactly as in [Exercises, solutions and explanations](exercises.md): an untagged exercise cell, directly followed by an `{nma-solution}`. The card gets the *Click for solution* link.
 
 Try it: fill in `cube`, or don't. If you run the **next** cell first, the page runs the reference solution in place of the unfinished exercise and says so, so you can always run ahead.
 
@@ -318,7 +318,7 @@ shows a note. The solutions are hidden, not secret, as on every other page.
 :::
 ## Videos and feedback
 
-`{nma-video}` and `{nma-slides}` go on the stage, and `{nma-feedback}` stays on the card. Both work as in [Tutorial 4](videos-and-slides.md). Media keep playing only while their step is active: muted `.mp4` figures play and pause as you scroll.
+`{nma-video}` and `{nma-slides}` go on the stage, and `{nma-feedback}` stays on the card. Both work as in [Videos and slides](videos-and-slides.md) and [Feedback widgets](feedback.md). Media keep playing only while their step is active: muted `.mp4` figures play and pause as you scroll.
 
 :::{nma-video} Video 1: Linear Dynamical Systems
 :youtube: 87z6OR7-DBI
@@ -339,13 +339,13 @@ Did this step make sense?
 The **Enable Python** pill at the top of the stage (or any Run button) starts [Pyodide](https://pyodide.org) once for the page. The first load is about 10 MB plus the packages a cell imports, and the browser then caches it. JupyterLite is not used on scrolly pages, so its power button is hidden.
 
 - Packages come from the cells' imports. numpy, matplotlib, scipy and pandas all work. Anything Pyodide can't run belongs in the Colab notebook.
-- No sockets: load data files with `pyodide.http.open_url` under `sys.platform == "emscripten"` (see the setup cell of W2D1 Tutorial 2).
+- No sockets: load data files with `pyodide.http.open_url` under `sys.platform == "emscripten"` (see the setup cell of [the scrolly LDS example](../examples/lds/scrolly-page.md)).
 - The Pyodide build comes from `nma.scrolly.pyodide_url` in `myst.yml`. The host must send CORS headers.
 
 :::{stage}
 ```yaml
 # myst.yml
-extend: https://cdn.jsdelivr.net/npm/@neuromatch/course-kit@0.3/dist/nma.yml  # the course kit's MyST plugin
+extend: https://cdn.jsdelivr.net/npm/@neuromatch/course-kit@0.4/dist/nma.yml  # the course kit's MyST plugin
 
 nma:
   scrolly:
@@ -370,7 +370,7 @@ In CI, `nma-kit render-scrolly` runs every scrolly page's **instructor** noteboo
 uv run nma-kit render-scrolly
 uv run myst start
 
-# Writes _build/scrolly/<Day>/<Tutorial>.json
+# Writes _build/scrolly/<folder>/<page>.json
 ```
 :::
 
@@ -394,7 +394,7 @@ Open this page's notebook from the badges at the top to see the result. A scroll
 :::
 ## Converting an existing tutorial
 
-[W2D1 Tutorial 2](../examples/lds/scrolly-page.md) is [Tutorial 1](../examples/lds/normal-page.md) converted this way:
+[The scrolly LDS page](../examples/lds/scrolly-page.md) is [the normal LDS page](../examples/lds/normal-page.md) converted this way (the general notebook steps are in [Convert an existing notebook](convert-a-notebook.md)):
 
 1. Copy the page and add `layout: scrolly`, plus `site: hide_outline: true`.
 2. Merge setup, figure style and helpers into one `remove-cell` cell. Drop `%` magics and the ipywidgets import.
@@ -428,4 +428,6 @@ Open this page's notebook from the badges at the top to see the result. A scroll
 :::
 # Now *write your own*
 
-Start from W2D1 Tutorial 2, or add `layout: scrolly` and a few `{step}` markers to a page you already have.
+Start from [the scrolly LDS page](../examples/lds/scrolly-page.md), or add `layout: scrolly` and a few `{step}` markers to a page you already have.
+
+**Next:** [Convert an existing notebook](convert-a-notebook.md) · [Page types](page-types.md) · Reference: [`{step}`](../reference/directives.md#step) and [`{stage}`](../reference/directives.md#stage).
