@@ -1,10 +1,10 @@
 version: 1
 # The Neuromatch course kit: adds the MyST plugin ({nma-video}, {nma-solution},
-# editable cells, scrolly pages, ...) and turns on JupyterLite. @0.3 = newest
-# 0.3.x; CI pins it to the exact version of the workflow's kit release.
-extend: https://cdn.jsdelivr.net/npm/@neuromatch/course-kit@0.3/dist/nma.yml
+# editable cells, scrolly pages, ...) and turns on JupyterLite. @0.4 = newest
+# 0.4.x; CI pins it to the exact version of the workflow's kit release.
+extend: https://cdn.jsdelivr.net/npm/@neuromatch/course-kit@0.4/dist/nma.yml
 project:
-  title: Neuromatch Course Guide
+  title: Neuromatch Course Kit Guide
   authors:
     - name:
         literal: Neuromatch
@@ -14,54 +14,78 @@ project:
     code: BSD-3-Clause
     content: CC-BY-4.0
   toc:
-    - file: tutorials/intro.md
-    - file: tutorials/new_course.md
-    - file: tutorials/W1D1_GettingStarted/chapter_intro.md
+    - file: guide/index.md
+    - file: guide/start/index.md
       children:
-        - file: tutorials/W1D1_GettingStarted/W1D1_Tutorial1.md
-        - file: tutorials/W1D1_GettingStarted/W1D1_Tutorial2.md
-        - file: tutorials/W1D1_GettingStarted/W1D1_Tutorial3.md
-        - file: tutorials/W1D1_GettingStarted/W1D1_Tutorial4.md
-        - file: tutorials/W1D1_GettingStarted/W1D1_Bonus.md
-        - file: tutorials/W1D1_GettingStarted/further_reading.md
-    - file: tutorials/W1D2_InteractiveContent/chapter_intro.md
+        - file: guide/start/what-is-the-kit.md
+        - file: guide/start/which-path.md
+    - file: guide/author/index.md
       children:
-        - file: tutorials/W1D2_InteractiveContent/W1D2_Tutorial1.md
-        - file: tutorials/W1D2_InteractiveContent/W1D2_Tutorial2.md
-        - file: tutorials/W1D2_InteractiveContent/W1D2_Tutorial3.md
-        - file: tutorials/W1D2_InteractiveContent/W1D2_Tutorial4.md
-        - file: tutorials/W1D2_InteractiveContent/W1D2_Tutorial5.md
-        - file: tutorials/W1D2_InteractiveContent/W1D2_Tutorial6.md
-        - file: tutorials/W1D2_InteractiveContent/W1D2_Tutorial7.md
-        - file: tutorials/W1D2_InteractiveContent/W1D2_Bonus.md
-        - file: tutorials/W1D2_InteractiveContent/further_reading.md
-    - file: tutorials/W1D3_PublishingAndCI/chapter_intro.md
+        - file: guide/author/quick-start.md
+        - file: guide/author/write-pages.md
+        - file: guide/author/add-a-page.md
+        - file: guide/author/figures-math-xrefs.md
+        - file: guide/author/page-types.md
+        - file: guide/author/run-code-in-browser.md
+        - file: guide/author/rich-outputs.md
+        - file: guide/author/images-and-data.md
+        - file: guide/author/exercises.md
+        - file: guide/author/videos-and-slides.md
+        - file: guide/author/feedback.md
+        - file: guide/author/instructor-notes.md
+        - file: guide/author/scrolly.md
+        - file: guide/author/convert-a-notebook.md
+        - file: guide/author/more-myst.md
+        - file: guide/author/fix-a-failing-check.md
+    - file: guide/maintainer/index.md
       children:
-        - file: tutorials/W1D3_PublishingAndCI/W1D3_Tutorial1.md
-        - file: tutorials/W1D3_PublishingAndCI/W1D3_Tutorial2.md
-        - file: tutorials/W1D3_PublishingAndCI/W1D3_Tutorial3.md
-        - file: tutorials/W1D3_PublishingAndCI/W1D3_Tutorial4.md
-        - file: tutorials/W1D3_PublishingAndCI/W1D3_Bonus.md
-        - file: tutorials/W1D3_PublishingAndCI/further_reading.md
-    - file: tutorials/W2D1_Examples/chapter_intro.md
+        - file: guide/maintainer/create-a-course.md
+        - file: guide/maintainer/publish-with-ci.md
+        - file: guide/maintainer/pr-previews.md
+        - file: guide/maintainer/notebooks-and-badges.md
+        - file: guide/maintainer/instructor-site.md
+        - file: guide/maintainer/branding.md
+        - file: guide/maintainer/structure-and-scale.md
+        - file: guide/maintainer/project-booklet.md
+        - file: guide/maintainer/upgrade-the-kit.md
+    - file: guide/instructor/index.md
       children:
-        - file: tutorials/W2D1_Examples/W2D1_Tutorial1.md
-        - file: tutorials/W2D1_Examples/W2D1_Tutorial2.md
-        - file: tutorials/W2D1_Examples/W2D1_Tutorial3.md
-        - file: tutorials/W2D1_Examples/further_reading.md
-    - file: projects/README.md
+        - file: guide/instructor/what-you-get.md
+    - file: guide/reference/index.md
       children:
-        - file: projects/project_guidance.md
-        - file: projects/example_macrocircuits/Macrocircuits.md
-        - file: projects/example_neurons/README.md
+        - file: guide/reference/directives.md
+        - file: guide/reference/frontmatter.md
+        - file: guide/reference/nma-config.md
+        - file: guide/reference/cli.md
+        - file: guide/reference/check-rules.md
+        - file: guide/reference/browser-limits.md
+        - file: guide/reference/further-reading.md
+    - file: guide/examples/index.md
+      children:
+        - file: guide/examples/directives/index.md
           children:
-            - file: projects/example_neurons/allen_visual_behavior.md
+            - file: guide/examples/directives/markdown-basics.md
+            - file: guide/examples/directives/code-cells.md
+            - file: guide/examples/directives/video-and-slides.md
+            - file: guide/examples/directives/exercise.md
+            - file: guide/examples/directives/feedback.md
+            - file: guide/examples/directives/instructor.md
+        - file: guide/examples/lds/normal-page.md
+        - file: guide/examples/lds/scrolly-page.md
+        - file: guide/examples/colab/heavy-compute.md
+        - file: guide/examples/projects/index.md
+          children:
+            - file: guide/examples/projects/project_guidance.md
+            - file: guide/examples/projects/example_macrocircuits/Macrocircuits.md
+            - file: guide/examples/projects/example_neurons/index.md
+              children:
+                - file: guide/examples/projects/example_neurons/allen_visual_behavior.md
 
 site:
   template: book-theme
   options:
     folders: true
-    logo_text: Neuromatch Course Guide   # a course puts its own name here
+    logo_text: Neuromatch Course Kit Guide   # a course puts its own name here
     # The kit's branding (stylesheet, Rubik font, logos, favicon), written to
     # _nma/ by `nma-kit sync-assets` (CI runs it for you; the folder is not committed).
     style: _nma/site.css
@@ -73,6 +97,10 @@ site:
 # (MyST logs "extra key ignored: nma", which is expected).
 # Use `key: value` entries with string values; `nma-kit check` rejects numbers, lists and deeper nesting.
 nma:
+  # The folders that hold your pages: the kit checks them and builds notebooks from
+  # them (required since kit 0.4). Pages outside these folders are ignored by the kit.
+  content:
+    - guide
   # Branding (optional). Override the kit's colours and/or append your own CSS:
   #   brand:
   #     primary: "#D9480F"

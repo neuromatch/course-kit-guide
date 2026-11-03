@@ -1,44 +1,36 @@
-# Neuromatch Course Guide
+# Neuromatch Course Kit Guide
 
 The manual and showcase for building a course with [MyST](https://mystmd.org)
 (JupyterBook 2) and the [Neuromatch course kit](https://github.com/neuromatch/course-kit).
 
 **Live book:** https://neuromatch.github.io/course-kit-guide/
 
-## Starting a course
+## Read the guide
 
-**Don't fork or copy this repository.** A course never merges back into it, and
-its content will diverge. Generate a fresh repository with the kit instead:
+The book is organised by who you are:
 
-```bash
-uv venv && uv pip install neuromatch-course-kit
-uv run nma-kit init --title "My Course" --author "Your Name" \
-    --github https://github.com/<org>/<repo>
-```
-
-The result is a small starter (`myst.yml`, the CI workflow, one example day, a
-setup checklist) with no history and no link to this repo. The CI logic, the
-MyST plugin and the `nma-kit` CLI all come from the kit, so your course gets
-fixes through the version in `course.yml` (`@v0.3`) and `extend:` in `myst.yml`.
-See ["Starting a new course"](https://neuromatch.github.io/course-kit-guide/tutorials/new_course)
-for the full walkthrough.
-
-## What this repository is
-
-A book that teaches course authors the kit, written with the kit, so each page
-is also a working example:
-
-| Part | What it shows |
+| You… | Start here |
 |---|---|
-| `tutorials/intro.md`, `tutorials/new_course.md` | Orientation and how to start a course |
-| `W1D1` Getting Started | MyST writing, TOC, rich outputs, page types |
-| `W1D2` Interactive Content | In-browser Python, widgets, data, videos, slides, exercises, instructor notes, scrollytelling |
-| `W1D3` Publishing and CI | The workflow, notebooks and badges, branding, the instructor site |
-| `W2D1` Examples | A real NMA tutorial, as a normal page and as a scrolly page |
-| `projects/` | Project booklet pages: guidance, a NeuroAI project, a dataset guide |
+| Write or convert tutorials | [Quick start for authors](https://neuromatch.github.io/course-kit-guide/guide/author/quick-start) |
+| Create and run a course repository | [Create a course](https://neuromatch.github.io/course-kit-guide/guide/maintainer/create-a-course) |
+| Teach with a course | [What instructors get](https://neuromatch.github.io/course-kit-guide/guide/instructor/what-you-get) |
+| Look something up | [Reference](https://neuromatch.github.io/course-kit-guide/guide/reference/) |
 
-Copy snippets and pages from here into your course. Changes to the kit itself
-belong in the kit repository.
+**Don't fork or copy this repository** to start a course: a course never merges back
+into it. Generate a fresh repository with `nma-kit init` (see "Create a course" above).
+Changes to the kit itself belong in the
+[kit repository](https://github.com/neuromatch/course-kit).
+
+## What is in this repository
+
+Everything is under `guide/` (one content folder, `nma.content: [guide]` in `myst.yml`):
+
+| Folder | What it holds |
+|---|---|
+| `guide/start/`, `guide/author/` | Orientation; how-to pages for authors |
+| `guide/maintainer/`, `guide/instructor/` | Setup and operation pages; the instructor view |
+| `guide/reference/` | Directives, frontmatter, settings, commands, rules, limits |
+| `guide/examples/` | Working pages to copy: directive examples, a real tutorial as a normal and a scrolly page, a Colab page, project booklet examples |
 
 ## Working on this repository
 
