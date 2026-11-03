@@ -4,6 +4,8 @@ title: Further reading
 
 # Further reading
 
+For: everyone (lookup)
+
 ## MyST and JupyterBook
 
 - [MyST Markdown Guide](https://mystmd.org/guide)

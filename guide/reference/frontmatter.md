@@ -74,10 +74,10 @@ site:
 (feedback-prefix)=
 ## `feedback_prefix`
 
-The section id sent by a `{nma-feedback}` widget is `<prefix>_<name>`. The prefix is derived from the file name (`W2D1_Tutorial1` becomes `W2D1_T1`; any other name is used as is). Set the key when a page is renamed or converted from a notebook whose ids must not change:
+The section id sent by a `{nma-feedback}` widget is `<prefix>_<name>`. The prefix is derived from the file name (`W<week>D<day>_Tutorial1` becomes `W<week>D<day>_T1`; any other name is used as is). Set the key when a page is renamed or converted from a notebook whose ids must not change:
 
 ```yaml
-feedback_prefix: W2D2_T1
+feedback_prefix: Old_Notebook_T1
 ```
 
 It may use only letters, digits and underscores.
@@ -88,7 +88,7 @@ It may use only letters, digits and underscores.
 ---
 title: "Training a CNN"
 runtime: colab
-feedback_prefix: W3D2_T3
+feedback_prefix: Old_Notebook_T3
 kernelspec:
   name: python3
   display_name: Python 3

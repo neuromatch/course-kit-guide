@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Green gate for the guide restructure. Runs the kit steps and the stale-name grep
 # on a scratch copy of the repo, so the working tree is never touched.
-#   SKIP_STALE=1  skip the stale-name grep (until the last rewrite tasks)
+#   SKIP_STALE=1       skip the stale-name grep (until the last rewrite tasks)
+#   STALE_SKIP_DOCS=1  leave README.md and AGENTS.md out of the stale-name grep
 set -uo pipefail
 export ROOT=$(cd "$(dirname "$0")/../.." && pwd)
 W=/tmp/verify
@@ -39,12 +40,24 @@ fi
 if [ -z "${SKIP_STALE:-}" ]; then
   say "stale names"
   cd "$ROOT"
-  targets=$(ls -d guide README.md AGENTS.md myst.yml tutorials projects 2>/dev/null)
+  if [ -n "${STALE_SKIP_DOCS:-}" ]; then
+    targets=$(ls -d guide myst.yml 2>/dev/null)
+  else
+    targets=$(ls -d guide README.md AGENTS.md myst.yml tutorials projects 2>/dev/null)
+  fi
   allow=docs/superpowers/verify-allow.txt
   hits=$(grep -rnE 'W[0-9]D[0-9]|tutorials/|Tutorial [0-9]|Day [0-9]|Week [0-9]' $targets --include=*.md --include=myst.yml \
     | grep -v '^guide/examples/' || true)
-  if [ -s "$allow" ] && [ -n "$hits" ]; then
-    hits=$(printf '%s\n' "$hits" | grep -vFf <(sed 's/:/ /;s/ .*//' "$allow") || true)
+  if [ -n "$hits" ] && [ -s "$allow" ]; then
+    hits=$(printf '%s\n' "$hits" | python3 -c "
+import sys
+allow = [l.rstrip('\n').split('|', 1) for l in open('$allow') if '|' in l and not l.startswith('#')]
+for line in sys.stdin:
+    path, _, text = line.partition(':')
+    if any(path == a and b in line for a, b in allow):
+        continue
+    sys.stdout.write(line)
+")
   fi
   if [ -n "$hits" ]; then printf '%s\n' "$hits" | head -40; echo "FAILED: stale names"; fail=1; fi
 

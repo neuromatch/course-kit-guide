@@ -1,0 +1,5 @@
+# path|substring: a stale-name hit is allowed when its file and its text match.
+guide/maintainer/create-a-course.md|`tutorials/` | An intro page
+guide/maintainer/upgrade-the-kit.md|{name: tutorials, path:
+guide/reference/further-reading.md|compneuro.neuromatch.io
+guide/author/scrolly.md|feedback_prefix: W1D2_T7

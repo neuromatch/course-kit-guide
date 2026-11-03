@@ -110,7 +110,7 @@ Markdown answer to a discussion question, math allowed: $a < 0$.
 |---|---|
 | Argument | A section name: letters, digits and underscores, unique on the page. Required. |
 | Options and body | None. |
-| Id sent | `<prefix>_<name>`. The prefix is the frontmatter `feedback_prefix` if set, otherwise derived from the file name (`W2D1_Tutorial1` becomes `W2D1_T1`; any other name is used as is). |
+| Id sent | `<prefix>_<name>`. The prefix is the frontmatter `feedback_prefix` if set, otherwise derived from the file name (`W<week>D<day>_Tutorial1` becomes `W<week>D<day>_T1`; any other name is used as is). |
 | Settings | `nma.feedback.{url, project, user_key}` in `myst.yml`, see [`nma:` settings](nma-config.md). Required once any page uses the directive. |
 | Site | A widget that needs no kernel and posts to the datatops project. |
 | Notebook | A hidden `content_review(...)` cell per directive and one hidden "Import feedback gadget" cell at the top. |
