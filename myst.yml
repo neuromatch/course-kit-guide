@@ -45,6 +45,8 @@ project:
         - file: guide/maintainer/instructor-site.md
         - file: guide/maintainer/branding.md
         - file: guide/maintainer/structure-and-scale.md
+        - file: guide/maintainer/project-booklet.md
+        - file: guide/maintainer/upgrade-the-kit.md
     - file: guide/instructor/index.md
       children:
         - file: guide/instructor/what-you-get.md

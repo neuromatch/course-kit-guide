@@ -2,9 +2,11 @@
 title: "Project booklet examples"
 ---
 
-# Project Booklet
+# Project booklet examples
 
-This section contains the project materials for the course.
+For: author and maintainer (examples)
+
+This section contains project booklet material converted to MyST.
 
 ## Worked examples
 
@@ -26,35 +28,15 @@ MuJoCo) or data downloads can't be assumed to work in the browser. Images are li
 from the upstream course repositories instead of being copied here, to keep this
 repository small.
 
-## How to structure your project booklet
-
-Add your project guidance documents to the `projects/` directory and register
-them in `project.toc` in `myst.yml` under a "Project Booklet" section:
-
-```yaml
-- title: Project Booklet
-  children:
-    - file: projects/README.md
-    - file: projects/project_guidance.md
-    - file: projects/datasets.md
-```
-
-## Template placeholder
-
-Replace this file with your actual project introduction. Include:
-
-- Overview of the project format
-- Timeline and milestones
-- Links to datasets
-- Guidance on the modelling workflow
+To set up a booklet in your own course, see [Project booklet](../../maintainer/project-booklet.md).
 
 ## Layout used by the examples
 
-    projects/
-      README.md                      <- this file: project introduction
+    guide/examples/projects/
+      index.md                       <- this file: the booklet examples
       project_guidance.md            <- daily guidance for students
       example_macrocircuits/
         Macrocircuits.md             <- one full project notebook
       example_neurons/
-        README.md                    <- dataset guide
+        index.md                     <- dataset guide
         allen_visual_behavior.md     <- starter page for one dataset

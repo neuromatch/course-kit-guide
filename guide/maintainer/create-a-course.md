@@ -42,15 +42,7 @@ The feedback settings (`nma.feedback`) are commented out. Feedback widgets post 
 - Preview locally with `uv run nma-kit sync-assets && uv run myst start`, then push to `main`. Authors usually work through pull requests ([Quick start](../author/quick-start.md)).
 - Optional: turn on [pull request previews](pr-previews.md) and the [instructor site](instructor-site.md), both of which need Cloudflare Pages.
 
-### Getting kit updates
-
-Your course depends on the kit in three places, and all three follow the same release line:
-
-- `extend:` in `myst.yml` (the MyST plugin),
-- `@v0.4` in `.github/workflows/course.yml` (the CI workflows, which also install the matching `nma-kit`),
-- the `neuromatch-course-kit` package you use locally.
-
-`@v0.4` and `@0.4` mean "the newest 0.4.x", so compatible fixes arrive on your next build. Pin an exact version (for example `@v0.4.0`) to freeze a finished course. The kit is still in development, so a new minor version can change the rules: change all three places together and run `nma-kit check`.
+Keep the kit current: see [Upgrade the kit](upgrade-the-kit.md).
 
 ## Next
 

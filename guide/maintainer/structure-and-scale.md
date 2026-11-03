@@ -4,65 +4,78 @@ title: "Structure and scale"
 
 # Structure and scale
 
-`nma-kit init` creates one example day. Here is how to grow it into a full course.
+For: maintainer
 
-## Adding more days to Week 1
+`nma-kit init` creates one example day. This page is how to grow it into a full course: how the table of contents and the content folders work, how to add days, weeks and a precourse, and how to organise a large course. The kit needs two things only: pages live in a folder listed in `nma.content`, and they are listed in `project.toc`.
 
-1. Create `tutorials/W1D4_NewTopic/` with the standard file structure:
+## You write
 
-       chapter_intro.md
-       W1D4_Tutorial1.md
-       W1D4_Tutorial2.md
-       W1D4_Tutorial3.md
-       W1D4_Bonus.md
-       further_reading.md
+### The table of contents
 
-2. Add the entries to `project.toc` in `myst.yml`:
+The table of contents is a list in `myst.yml` under `project.toc`. Nothing generates it: a page that is not listed does not appear in the sidebar. Make each section's `index.md` the top-level entry and list its pages as `children`. Don't wrap the index in a `title:` group, which would list the section twice in the sidebar.
 
-       - file: tutorials/W1D4_NewTopic/chapter_intro.md
-         children:
-           - file: tutorials/W1D4_NewTopic/W1D4_Tutorial1.md
-           - file: tutorials/W1D4_NewTopic/W1D4_Tutorial2.md
-           - file: tutorials/W1D4_NewTopic/W1D4_Tutorial3.md
-           - file: tutorials/W1D4_NewTopic/W1D4_Bonus.md
-           - file: tutorials/W1D4_NewTopic/further_reading.md
+````text
+project:
+  toc:
+    - file: guide/index.md
+    - file: guide/week1/index.md
+      children:
+        - file: guide/week1/day1/index.md
+          children:
+            - file: guide/week1/day1/tutorial1.md
+            - file: guide/week1/day1/tutorial2.md
+        - file: guide/week1/day2/index.md
+````
 
-3. Push to `main` — CI handles notebook generation and deployment automatically.
+The Neuromatch Academy convention names day folders `W<week>D<day>_<Topic>` with `W<week>D<day>_Tutorial<n>.md` pages. Other courses can name folders as they like: the kit only needs the pages to be listed in `project.toc`.
 
-## Adding more weeks
+### Content folders
 
-Same pattern — increment the week number. (The `W{week}D{day}` names are the
-Neuromatch Academy convention. The kit only needs the pages to be listed in
-`project.toc`, so a course with a different structure can name folders as it likes.)
+`nma.content` lists the folders whose pages the kit checks and converts to notebooks. It is required since kit 0.4.0 and has no default:
 
-    tutorials/
-      W2D1_AdvancedTopic/
-      W2D2_AnotherTopic/
-      W2D3_YetAnotherTopic/
+````text
+nma:
+  content:
+    - guide
+````
 
-Update `myst.yml` accordingly.
+This guide uses a single folder, `guide`. A course made by `nma-kit init` uses two, one per kind of content:
 
-## Adding a precourse week
+````text
+nma:
+  content:
+    - tutorials
+    - projects
+````
 
-Create `tutorials/W0D1_Precourse/` for prerequisite material and register it as
-the first section in the TOC before Week 1.
+Give a folder a different notebook name with `{name, path}`:
 
-## Projects section
+````text
+nma:
+  content:
+    - tutorials
+    - {name: booklet, path: docs/project-booklet}
+````
 
-The `projects/` directory holds the project booklet. Add markdown files there
-and register them in the TOC, with the landing page as the parent entry (don't
-wrap it in a `title:` group, which would list it twice in the sidebar):
+### Adding days, weeks and a precourse
 
-```yaml
-- file: projects/README.md
-  children:
-    - file: projects/project_guidance.md
-    - file: projects/datasets.md
-```
+Add a folder per day, list it in `project.toc`, and push to `main`: CI handles notebook generation and deployment. For more weeks, repeat the pattern with the next week number. For prerequisite material, add a precourse folder and register it as the first section before week 1.
 
-## Splitting content across repos
+## You get
 
-For large courses where content lives in separate repos, fetch content into
-`tutorials/` at build time using a `git clone` step in `.github/workflows/course.yml`
-before `nma-kit check` runs. Document the fetch step clearly in the
-workflow file.
+- **One notebook tree per content folder.** A page at `<path>/<folder>/<page>.md` becomes `notebooks/<name>/<folder>/<page>.ipynb` on the notebooks branch. The **name** is the first folder under `notebooks/`: it defaults to the path, and `{name, path}` overrides it.
+- **Pages outside every content folder are ignored** by the kit: no checks, no notebook, no badges.
+- **Section pages** in the sidebar, without duplicates, when each section's index is the parent entry.
+
+## Rules
+
+- Folders in `nma.content` cannot overlap or nest, must be inside the course (no `.` or `..`) and cannot be under `notebooks`, `_build`, `_nma` or `node_modules`. Names use letters, digits, `-`, `_` and `/`, and are unique ([`nma:` settings](../reference/nma-config.md#nma-content)).
+- Every page the course publishes must be both under a content folder and listed in `project.toc`.
+- Renaming or moving a folder changes the notebook URLs. Renaming a page *file* also changes the default feedback ids of its widgets unless `feedback_prefix` is set ([Add a page](../author/add-a-page.md)).
+- **Large courses with content in several repositories:** the kit's workflows build the repository they run in and have no step for fetching other repositories. Bring the content into one repository before it builds, for example with a separate workflow that syncs it in.
+
+## Next
+
+- [Project booklet](project-booklet.md)
+- [Upgrade the kit](upgrade-the-kit.md)
+- Reference: [`nma:` settings](../reference/nma-config.md)

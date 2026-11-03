@@ -4,9 +4,15 @@ title: "Branding and customising"
 
 # Branding and customising
 
-## Changing the title and metadata
+For: maintainer
 
-Edit `myst.yml` — these fields appear in the browser tab, sidebar, and Open Graph
+The kit gives your course the Neuromatch look (colours, the Rubik font, logos, favicon and the styling of its own widgets). Everything you change lives in `myst.yml`, in the `site:` block for MyST and the `nma:` block for the kit. Change the title, colours, logo and CSS to make the book yours.
+
+## You write
+
+### Title and metadata
+
+Edit `myst.yml`: these fields appear in the browser tab, sidebar, and Open Graph
 metadata when the book is published:
 
 ```yaml
@@ -19,7 +25,7 @@ project:
   github: https://github.com/your-org/your-course-repo
 ```
 
-## Branding
+### Branding files
 
 The kit provides the Neuromatch look: colours, the Rubik font, logos, favicon,
 and the styling of its own widgets. `nma-kit sync-assets` writes them to `_nma/`
@@ -36,7 +42,7 @@ site:
     favicon: _nma/favicon.png
 ```
 
-## Changing the colours
+### Colours
 
 Set any of these in the `nma:` block of `myst.yml` (all optional, `"#RRGGBB"`):
 
@@ -50,7 +56,7 @@ nma:
     accent: "#FA7A7A"        # exercise cells
 ```
 
-## Using your own logo
+### Your own logo
 
 To replace the Neuromatch logo, place your file in `_static/` and point the
 logo options at it instead of `_nma/`:
@@ -66,10 +72,9 @@ site:
 SVG and PNG both work. The logo appears in the top-left of the sidebar.
 `logo_dark` swaps in a light version of the logo when the reader is in dark mode,
 and `logo_text` puts the course title beside the logo — handy when the logo is an
-icon rather than a full wordmark. See Tutorial 2 of Week 1 Day 1 for the same options in the
-context of the sidebar and table of contents.
+icon rather than a full wordmark. 
 
-## Custom CSS
+### Custom CSS
 
 Put your own rules in a file such as `_static/extra.css` and list it in `myst.yml`.
 The kit appends it after its own stylesheet (into `_nma/site.css`), so your
@@ -90,7 +95,7 @@ Example contents:
 }
 ```
 
-## Enabling download buttons
+### Download buttons
 
 Let students download pages as PDF or Jupyter notebook:
 
@@ -100,7 +105,7 @@ site:
     downloads: true
 ```
 
-## Choosing a different theme
+### Theme
 
 MyST uses `book-theme` by default. To list available themes:
 
@@ -114,3 +119,23 @@ Then set it in `myst.yml`:
 site:
   template: book-theme
 ```
+
+## You get
+
+- A book with your title and metadata in the browser tab, sidebar and Open Graph tags.
+- The kit's stylesheet with your colours, written into `_nma/site.css` by `nma-kit sync-assets` (CI does this for you; run it once locally before `myst start`, and again after upgrading the kit). `_nma/` is self-ignoring and is never committed.
+- Your own `_static/extra.css` appended after the kit's stylesheet, so your rules win.
+
+## Rules
+
+- Colours are `"#RRGGBB"` strings. `primary_hover` and `primary_light` default to darker and lighter versions of `primary`.
+- Keep `project.jupyter.lite` on (the kit's `extend:` file sets it): MyST only emits the in-browser kernel assets with it.
+- Site-wide files (a custom logo, extra CSS) go in a root `_static/` folder, which you create when needed. A page's own images stay beside the page.
+- `logo_text` puts the course title beside the logo: handy when the logo is an icon rather than a wordmark.
+- Never edit files in `_nma/`: they are regenerated.
+
+## Next
+
+- [Structure and scale](structure-and-scale.md)
+- [Publish with CI](publish-with-ci.md)
+- Reference: [`nma:` settings](../reference/nma-config.md)
