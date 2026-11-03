@@ -26,7 +26,7 @@ For: author and maintainer (lookup)
 uv run nma-kit check
 ```
 
-Validates the content rules and `myst.yml` (see [Rules enforced by `check`](check-rules.md)). Writes nothing. `notebooks` and `prepare-site` run the same checks first.
+Validates the content rules and `myst.yml` (see [Rules enforced by `check`](check-rules.md)): page rules, the `nma:` block, `.ipynb` files in content folders, and the `nma.style.extra` file. Writes nothing. `notebooks` and `prepare-site` run the same checks first.
 
 (cmd-notebooks)=
 ## `notebooks`
@@ -44,7 +44,7 @@ For every page with a `kernelspec`, writes `notebooks/<root>/<folder>/<page>.ipy
 uv run nma-kit render-scrolly
 ```
 
-Runs each scrolly page's instructor notebook (exercise cells removed, `# @param` at defaults) and writes `_build/scrolly/<folder>/<page>.json` with each cell's output. A cell that raises fails the command with `file:line`. Run it before `myst start` so scrolly panels show real outputs.
+Runs each scrolly page's instructor notebook (exercise cells removed, `# @param` at defaults) and writes `_build/scrolly/<root>/<folder>/<page>.json` (`<root>` is the name of the content folder) with each cell's output. A cell that raises fails the command with `file:line`. Run it before `myst start` so scrolly panels show real outputs.
 
 (cmd-sync-assets)=
 ## `sync-assets`
@@ -72,7 +72,7 @@ Writes a starter course into `dir` (default: the current folder) and asks for an
 uv run nma-kit prepare-site [--dry-run] [--kit-version X.Y.Z]
 ```
 
-**CI only.** Edits the `.md` pages in place right before `myst build`: adds badges and the run-all fallback cell, and pins the `extend:` URL in `myst.yml` to `--kit-version` (default: the CLI's own version). If you run it locally, revert with `git checkout -- <content folders> myst.yml`.
+**CI only.** Edits the `.md` pages in place right before `myst build`: adds badges and the run-all fallback cell, runs `sync-assets`, and pins the `extend:` URL in `myst.yml` to `--kit-version` (default: the CLI's own version). If you run it locally, revert with `git checkout -- <content folders> myst.yml`.
 
 (cmd-publish-notebooks)=
 ## `publish-notebooks`

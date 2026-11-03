@@ -8,7 +8,7 @@ For: everyone
 
 This guide has a path for each kind of reader. Pick the one that matches what you do.
 
-## You write
+## Pick your path
 
 | If you… | You are an | Start here |
 |---|---|---|
@@ -16,7 +16,7 @@ This guide has a path for each kind of reader. Pick the one that matches what yo
 | Create the course repository, run CI, branding, previews or the instructor site | **Maintainer** | [Create a course](../maintainer/create-a-course.md) |
 | Teach with the course and read the instructor site | **Instructor / TA** | [What instructors get](../instructor/what-you-get.md) |
 
-## You get
+## Typical tasks
 
 **Author.** Typical tasks:
 
@@ -39,7 +39,7 @@ This guide has a path for each kind of reader. Pick the one that matches what yo
 
 **Everyone** can look things up in the [Reference](../reference/index.md), or copy from the [Examples](../examples/index.md).
 
-## Rules
+## Good to know
 
 - You can be more than one. An author on a small course is often the maintainer too.
 - Authors never need to touch CI or `myst.yml` beyond the table of contents; maintainers rarely write course content.

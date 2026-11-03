@@ -55,6 +55,8 @@ await micropip.install([f"{_whl}/<package>-<version>-py3-none-any.whl"])
 
 Remove the workaround once the package publishes wheels upstream.
 
+Scrolly pages load their own, newer Pyodide (`nma.scrolly.pyodide_url`), so package availability can differ there.
+
 ## What doesn't work in the browser
 
 - **GPUs**: no CUDA, so no GPU-backed PyTorch or JAX

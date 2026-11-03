@@ -14,8 +14,8 @@ The course kit adds nine directives to MyST. Use them instead of writing the equ
 | [`{nma-slides}`](#nma-slides) | Embed slides from OSF or a PDF in the repo | [Videos and slides](../author/videos-and-slides.md) |
 | [`{nma-solution}`](#nma-solution) | The reference solution of an exercise | [Exercises](../author/exercises.md) |
 | [`{nma-explanation}`](#nma-explanation) | A written answer to a discussion question | [Exercises](../author/exercises.md) |
-| [`{nma-feedback}`](#nma-feedback) | A 🙂/😐/🙁 feedback widget | [Videos and slides](../author/videos-and-slides.md) |
-| [`{nma-instructor}`](#nma-instructor) | Notes only instructors see | [Videos and slides](../author/videos-and-slides.md) |
+| [`{nma-feedback}`](#nma-feedback) | A 🙂/😐/🙁 feedback widget | [Feedback widgets](../author/feedback.md) |
+| [`{nma-instructor}`](#nma-instructor) | Notes only instructors see | [Instructor notes](../author/instructor-notes.md) |
 | [`{nma-data}`](#nma-data) | Declare files that code on the page reads | [Images and data files](../author/images-and-data.md) |
 | [`{step}`](#step) | Start a step of a scrollytelling page | [Scrollytelling pages](../author/scrolly.md) |
 | [`{stage}`](#stage) | Stage-only Markdown for a step | [Scrollytelling pages](../author/scrolly.md) |
@@ -77,7 +77,7 @@ def f(x):
 | Argument and options | None. |
 | Body | A single ```` ```python ```` fence. The outer fence needs more colons than the inner backticks need. |
 | Placement | Directly after an exercise code cell (an uncommented `raise NotImplementedError` line), with only blank lines between. Every exercise needs one, and every solution needs an exercise. |
-| Site | A *Click for solution* link to `notebooks/<folder>/solutions/<stem>_Solution_<n>.py` on the notebooks branch; the answer is not on the page. The instructor site shows it inline. |
+| Site | A *Click for solution* link to `notebooks/<root>/<folder>/solutions/<stem>_Solution_<n>.py` on the notebooks branch; the answer is not on the page. The instructor site shows it inline. |
 | Student notebook | The same link as a markdown cell. |
 | Instructor notebook | A code cell starting with `# Solution`. |
 
@@ -148,8 +148,8 @@ data/neuron_metadata.npz
 |---|---|
 | Argument | None. |
 | Body | One path per line, each starting with `data/` or `images/` (set by `nma.assets`), inside the page's folder, and the file must exist. Not empty. |
-| Site | Files up to 2 MB are embedded for the page's editable cells, so `np.load('data/x.npz')` works. |
-| Notebook | The files are copied to `notebooks/<folder>/` and a hidden download cell is added. |
+| Site | The declared files are embedded for the page's editable cells, so `np.load('data/x.npz')` works. Together they may not exceed 2 MB per page (`check` fails above that). |
+| Notebook | The files are copied to `notebooks/<root>/<folder>/` and a hidden download cell is added. |
 
 Images a page only displays do not need a declaration. See [Images and data files](../author/images-and-data.md).
 

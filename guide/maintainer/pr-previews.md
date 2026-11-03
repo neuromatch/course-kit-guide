@@ -46,7 +46,7 @@ Delete the job to turn previews off.
 ## Rules
 
 - **Same-repository pull requests only.** Pull requests from forks get no secrets, so they get no preview (the check still runs). Authors need write access to the repository.
-- **Without the secrets** the job still builds the site and skips the deploy with a notice, so a course can adopt the template before it has Cloudflare. Authors then get the `check` result but no preview link.
+- **Without the secrets** the job still builds the site and skips the deploy with a notice, so a course can adopt previews before it has Cloudflare. Authors then get the `check` result but no preview link.
 - **The repository must be public.** Colab and Kaggle read raw GitHub URLs.
 - Previews do not publish anything to the live site.
 

@@ -58,6 +58,8 @@ An exercise and its solution must be neighbours. Delete leftover `# to_remove` m
 {nma-slides} :path: '../x.pdf' must stay inside the day folder
 ```
 
+("The day folder" is the folder that holds your page.)
+
 Add a host option to the video. A slide `:path:` is a `.pdf` in the `slides/` folder next to your page. Rules: [media](../reference/check-rules.md#rules-media).
 
 ### Directives that must be at the top level

@@ -25,7 +25,7 @@ In the repository, go to **Settings → Pages**, set **Source** to `GitHub Actio
 1. `nma-kit check` validates the content rules ([Rules enforced by `check`](../reference/check-rules.md)).
 2. `nma-kit notebooks --dry-run` checks that every executable page converts.
 3. `nma-kit render-scrolly` runs every scrollytelling page headless. A cell that raises fails the check.
-4. The whole site is built, so a broken page fails the check too.
+4. `nma-kit prepare-site` and `myst build --html` build the whole site, so a broken page fails the check too.
 
 If previews are on, a `preview` job also builds the pull request and deploys it ([Pull request previews](pr-previews.md)).
 

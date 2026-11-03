@@ -13,7 +13,7 @@ Content is Markdown, never `.ipynb`. When you receive a notebook, from an older 
 Convert, then work through the mapping and checklist below:
 
 ```bash
-uv run jupytext --to md:myst path/to/Notebook.ipynb -o guide/week1/day1/tutorial1.md
+uv run jupytext --to md:myst path/to/Notebook.ipynb -o guide/<folder>/tutorial1.md
 ```
 
 How each notebook cell becomes MyST:

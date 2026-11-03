@@ -176,22 +176,16 @@ def explore_spikes(neuron, condition):
 ## Rules
 
 - **Declare what code reads.** Only declare an image with `{nma-data}` if your code *reads* it (for example loading a PNG into an array).
-- **Keep files small.** On the site, files up to 2 MB are embedded for the page's editable cells; larger files are not.
-- **Where they live.** Files must be in `data/` or `images/` inside the page's folder (the names come from `nma.assets`, see [`nma:` settings](../reference/nma-config.md)). Slide PDFs for `{nma-slides}` live in `slides/` ([Videos, slides and feedback](videos-and-slides.md)).
+- **Keep files small.** The declared files of a page are embedded in it for the editable cells, so together they must stay under 2 MB: `check` fails above that. Fetch large datasets with your own download cell.
+- **Where they live.** Files must be in `data/` or `images/` inside the page's folder (the names come from `nma.assets`, see [`nma:` settings](../reference/nma-config.md)). Slide PDFs for `{nma-slides}` live in `slides/` ([Videos and slides](videos-and-slides.md)).
 - **What `check` does.** It rejects references to missing images, undeclared files that code reads, and dynamic paths ([Rules enforced by `check`](../reference/check-rules.md#rules-assets)).
+- **Keep references under the folder names.** The kit only checks, publishes and rewrites image references that start with `images/` (the `nma.assets` name). An image next to the page (`diagram.png`) shows on the site but is missing from Colab and Kaggle notebooks, and `check` does not warn.
+- **Site-wide files** (a custom logo, extra CSS) go in a root `_static/` folder, which you create when needed ([Branding and customising](../maintainer/branding.md)).
+- **In the generated notebooks**, every image a page displays is copied to the notebooks branch automatically, and a download cell fetches the files you declare with `{nma-data}`. For any other file a notebook needs, use an absolute URL such as `https://raw.githubusercontent.com/<org>/<repo>/main/<folder>/<file>`. In the browser, fetch data with `pyodide.http.open_url` ([Browser limits and packages](../reference/browser-limits.md)), since Pyodide has no sockets.
 - The generation scripts (`generate_data.py`, `generate_schematic.py`) beside this page are only for reproducibility. Commit the files themselves, not generation scripts, in your own course.
-
-## Where files go
-
-Keep a page's files next to it, in `images/`, `data/` and `slides/` folders (the names are set by `nma.assets`, see [`nma:` settings](../reference/nma-config.md)). Paths are relative to the page.
-
-- **Beside the page.** With one or two files you can put them directly next to the page.
-- **Site-wide files** (a custom logo, extra CSS) go in a root `_static/` folder, which you create when needed (see [Branding and customising](../maintainer/branding.md)).
-- **On the site**, relative image paths just work.
-- **In the generated notebooks** (Colab and Kaggle), every image a page displays is copied to the notebooks branch automatically, and a download cell fetches the files you declare with `{nma-data}`. For any other file a notebook needs, use an absolute URL such as `https://raw.githubusercontent.com/<org>/<repo>/main/<folder>/<file>`. In the browser, fetch data with `pyodide.http.open_url` ([Browser limits and packages](../reference/browser-limits.md)), since Pyodide has no sockets.
 
 ## Next
 
-- [Videos, slides and feedback](videos-and-slides.md)
+- [Videos and slides](videos-and-slides.md)
 - [Figures, math and cross-references](figures-math-xrefs.md)
 - Reference: [`{nma-data}`](../reference/directives.md#nma-data)

@@ -21,6 +21,14 @@ source comes from a real **example page** that the kit validates, so it cannot r
 
   Region names are unique within a file and use lowercase letters, digits and `-`.
 
+## Which pages use the template
+
+The `For:` / You write / You get / Rules / Next shape is for how-to pages where there is source to write and a result to see (author and maintainer pages). It is not used for:
+
+- **Reference pages** (`guide/reference/`): lookup tables and error texts; a reader scans them, they don't follow a task. They carry only a `For: … (lookup)` label.
+- **Section indexes, examples and `author/scrolly.md`** (its cards are its structure).
+- **Orientation and instructor pages** (`start/which-path.md`, `instructor/what-you-get.md`): the reader writes nothing, so they keep the shape with headings that fit (*Pick your path*, *Typical tasks*, *Open it*, *What you see*, *Good to know*).
+
 ## Feature pages
 
 *You write* literal-includes the region. Use `:lang: text`, not `markdown`: the Markdown

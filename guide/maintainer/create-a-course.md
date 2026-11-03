@@ -37,7 +37,7 @@ The feedback settings (`nma.feedback`) are commented out. Feedback widgets post 
 ## Rules
 
 - The first push to `main` needs **Settings → Pages → Source: GitHub Actions** ([Publish with CI](publish-with-ci.md)).
-- Work through the checklist in the generated `README.md`.
+- Work through the checklist in the generated `README.md`. It includes **Settings → Actions → General → Workflow permissions → Read and write**, which CI needs to publish the notebooks branch.
 - Read the example day, replace it with your own, and update `project.toc` ([Structure and scale](structure-and-scale.md)).
 - Preview locally with `uv run nma-kit sync-assets && uv run myst start`, then push to `main`. Authors usually work through pull requests ([Quick start](../author/quick-start.md)).
 - Optional: turn on [pull request previews](pr-previews.md) and the [instructor site](instructor-site.md), both of which need Cloudflare Pages.

@@ -27,7 +27,7 @@ project:
         - file: guide/week1/day2/index.md
 ````
 
-The Neuromatch Academy convention names day folders `W<week>D<day>_<Topic>` with `W<week>D<day>_Tutorial<n>.md` pages. Other courses can name folders as they like: the kit only needs the pages to be listed in `project.toc`.
+Neuromatch Academy courses name day folders `W<week>D<day>_<Topic>` with `W<week>D<day>_Tutorial<n>.md` pages. Other courses can name folders as they like: the kit only needs the pages to be listed in `project.toc`.
 
 ### Content folders
 
@@ -57,9 +57,9 @@ nma:
     - {name: booklet, path: docs/project-booklet}
 ````
 
-### Adding days, weeks and a precourse
+### Adding units and prerequisite material
 
-Add a folder per day, list it in `project.toc`, and push to `main`: CI handles notebook generation and deployment. For more weeks, repeat the pattern with the next week number. For prerequisite material, add a precourse folder and register it as the first section before week 1.
+Add a folder for each unit of your course (a day, a week, a topic), list its pages in `project.toc`, and push to `main`: CI handles notebook generation and deployment. For prerequisite material, add a folder and register it as the first section.
 
 ## You get
 

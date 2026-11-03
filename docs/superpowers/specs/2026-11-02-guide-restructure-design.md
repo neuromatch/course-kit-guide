@@ -112,7 +112,7 @@ numbering and no schedules or learning objectives.
 
 ## 5. Page template
 
-Every feature page, in this order:
+Every how-to (feature) page, in this order. Reference pages, indexes, examples, orientation and instructor pages are exempt or adapt the headings (see `conventions.md`):
 
 1. One-line label: `For: author` (or maintainer / instructor).
 2. Two or three sentences: what it does and when to use it.

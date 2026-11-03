@@ -41,9 +41,11 @@ Also: no `# to_remove` markers in code cells; a solution body is a single ```` `
 ```text
 guide/p.md: line 8: {nma-video} needs at least one of :youtube:, :bilibili:, :osf:
 guide/p.md: line 8: {nma-slides} :path: '../x.pdf' must stay inside the day folder
+guide/p.md: line 8: {nma-slides} :path: 'deck.pdf' must start with slides/
+guide/p.md: line 8: {nma-slides} :path: 'slides/deck.txt' must be a .pdf file
 ```
 
-"The day folder" is the folder of the page. See [`{nma-video}`](directives.md#nma-video) and [`{nma-slides}`](directives.md#nma-slides).
+"The day folder" in these messages is the folder that holds the page. See [`{nma-video}`](directives.md#nma-video) and [`{nma-slides}`](directives.md#nma-slides).
 
 (rules-feedback)=
 ## Feedback uses the directive
@@ -63,6 +65,7 @@ See [`{nma-feedback}`](directives.md#nma-feedback) and [`nma:` settings](nma-con
 
 ```text
 guide/p.md: line 9: {nma-instructor} must be at the top level of the page, not inside another directive
+guide/p.md: line 9: {nma-instructor} is empty
 ```
 
 (rules-runtime)=
@@ -89,11 +92,13 @@ See [`{step}`](directives.md#step) and [Scrollytelling pages](../author/scrolly.
 (rules-assets)=
 ## Images and data files
 
-Every image a page references must exist inside the page folder's `images/` folder (no `..`). Every `{nma-data}` path must start with `data/` or `images/`, stay inside the page's folder and exist. Files that code reads without a declaration, and dynamic paths, are rejected.
+Every image reference that starts with the images folder (`images/`, set by `nma.assets.image`) must stay inside it (no `..`) and exist. References that don't start with that folder are not checked, and not published to the notebooks. Every `{nma-data}` path must start with `data/` or `images/`, stay inside the page's folder and exist, and the declared files together may not exceed 2 MB. Files that code reads without a declaration, and dynamic paths, are rejected.
 
 ```text
 guide/p.md: image 'images/nope.png' does not exist (guide/images/nope.png)
 guide/p.md: line 8: {nma-data} declares 'data/nope.npz', but guide/data/nope.npz does not exist
+guide/p.md: {nma-data} files total 3.1 MB, more than the 2 MB that can be embedded in the page for browser cells. Declare only small files; ...
+guide/p.md: line 8: {nma-data} is empty; list at least one file, e.g. data/data.npz
 ```
 
 See [`{nma-data}`](directives.md#nma-data).

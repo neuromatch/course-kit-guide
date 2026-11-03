@@ -6,6 +6,7 @@ site:
 kernelspec:
   name: python3
   display_name: Python 3
+# Keeps the feedback ids this page already sends (set when this page was converted)
 feedback_prefix: W1D2_T7
 ---
 
@@ -370,7 +371,7 @@ In CI, `nma-kit render-scrolly` runs every scrolly page's **instructor** noteboo
 uv run nma-kit render-scrolly
 uv run myst start
 
-# Writes _build/scrolly/<folder>/<page>.json
+# Writes _build/scrolly/<root>/<folder>/<page>.json
 ```
 :::
 
@@ -402,7 +403,7 @@ Open this page's notebook from the badges at the top to see the result. A scroll
 4. Rewrite `widgets.interact` demos with `# @param`.
 5. Add `remove-input` figures where a card has nothing to show.
 6. Avoid "on the right" in card text: the notebook reads it too.
-7. Run `--render` and `myst start`, and scroll through it.
+7. Run `nma-kit render-scrolly` and `myst start`, and scroll through it.
 
 :::{step}
 :kicker: CI errors

@@ -42,7 +42,8 @@ Notebook paths are `notebooks/<name>/<folder>/<page>.ipynb`, where `<name>` is t
 
 - The kit is still in development: a new minor version can change the rules. Change all three places in one commit.
 - Never upgrade only one place: the plugin, the workflows and the CLI must come from the same release line.
-- To force the newest version locally, upgrade the package explicitly: CI pins its own.
+- To force the newest version locally, upgrade the package explicitly: CI pins its own. Local previews also cache the downloaded plugin for 30 days: run `uv run myst clean --cache` after a bump.
+- Other refs: `@v0` follows the newest 0.x including breaking changes, and the workflows' `kit-version: latest` input forces the newest release on CI. Both can break your build without a change in your repository.
 
 ## Next
 

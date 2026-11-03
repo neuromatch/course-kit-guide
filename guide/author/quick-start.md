@@ -9,7 +9,7 @@ For: author
 Change a page, open a pull request, and read the result on the preview the build creates for you. You need write access to the course repository and nothing installed on your computer.
 
 ```{note}
-The preview link needs pull request previews, which the course maintainer turns on once (Cloudflare Pages, same-repository pull requests only). If your pull request gets no preview comment, ask your maintainer to enable them: see [Pull request previews](../maintainer/pr-previews.md). Without previews you still get the check result (tier 2 below).
+The preview link needs pull request previews, which the course maintainer turns on once (Cloudflare Pages, same-repository pull requests only). If your pull request gets no preview comment, ask your maintainer to enable them: see [Pull request previews](../maintainer/pr-previews.md). Without previews you still get the CI `check` result on the pull request.
 ```
 
 ## You write
@@ -48,7 +48,7 @@ CI runs the same command on every pull request. If it fails, see [Fix a failing 
 **3. A local preview (fastest edit loop, optional).** This needs Node.js 20 or newer (`nvm use` reads the repository's `.nvmrc`) and the course's requirements:
 
 ```bash
-uv pip install -r requirements.txt neuromatch-course-kit
+uv venv && uv pip install -r requirements.txt neuromatch-course-kit
 uv run nma-kit sync-assets    # the branding, once and after kit upgrades
 uv run nma-kit render-scrolly # only if you edit scrolly pages
 uv run myst start             # http://localhost:3000
