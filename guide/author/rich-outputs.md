@@ -7,14 +7,35 @@ kernelspec:
 
 # Rich outputs
 
-MyST renders interactive outputs from Altair, Plotly, and ipywidgets natively.
-These work both in the static build (pre-rendered from stored outputs) and live
-via JupyterLite when you run the cell (▶ Run).
+For: author
 
-## Interactive Altair chart
+Charts, widgets and tables render as rich outputs: Altair and Plotly charts and DataFrames show in the static build from their stored output, and ipywidgets become live once the cell runs (▶ Run). You write plain code; the last expression of a cell is what gets displayed.
 
-Altair charts are fully interactive in the rendered book — no kernel required.
-Drag to select points in the scatter plot; the bar chart updates in real time.
+## You write
+
+End a cell with the chart, widget or table you want shown:
+
+````text
+```{code-cell} python
+points & bars        # an Altair chart: interactive with no kernel
+```
+
+```{code-cell} python
+widgets.interact(plot_wave, frequency=(0.5, 5.0, 0.5))   # live after ▶ Run
+```
+
+```{code-cell} python
+df                   # a pandas DataFrame: a styled HTML table
+```
+````
+
+ipywidgets is not bundled with Pyodide, so install it in a hidden setup cell with `micropip` (the check on `sys.platform` makes it do nothing in Colab or Kaggle). Label a cell with `#| label: fig-name` to embed its output on another page with `{embed}`.
+
+## You get
+
+### An Altair chart
+
+Altair charts are interactive in the rendered book with no kernel. Drag to select points in the scatter plot; the bar chart updates.
 
 ```{code-cell} python
 import altair as alt
@@ -38,7 +59,7 @@ bars = alt.Chart(source).mark_bar().encode(
 points & bars
 ```
 
-## ipywidgets slider
+### An ipywidgets slider
 
 Once you run this cell, the slider is live and interactive.
 
@@ -72,7 +93,7 @@ def plot_wave(frequency=1.0):
 widgets.interact(plot_wave, frequency=(0.5, 5.0, 0.5))
 ```
 
-## Pandas DataFrame output
+### A pandas DataFrame
 
 DataFrames render as styled HTML tables in the book:
 
@@ -84,7 +105,7 @@ df = data.cars().iloc[:5, :5]
 df
 ```
 
-## Labelling outputs for reuse
+### A labelled output
 
 Label a cell to embed its output on another page:
 
@@ -107,10 +128,18 @@ plt.tight_layout()
 
 On any other page in the book, embed this output with:
 
-    {embed}`fig-horsepower-scatter`
+````text
+{embed}`fig-horsepower-scatter`
+````
 
-## Summary
+## Rules
 
-- Altair charts are interactive in the static build — no kernel needed
-- ipywidgets need the cell to be run first (▶ Run)
-- Label outputs with `#| label: fig-name` to reuse them across pages
+- Altair charts are interactive without a kernel; ipywidgets need the cell to be run first.
+- A hidden `remove-cell` setup cell is where `micropip.install` goes ([Browser limits and packages](../reference/browser-limits.md)).
+- Label outputs with `#| label: fig-name` to reuse them across pages.
+- On scrolly pages don't use `@widgets.interact`; use `# @param` ([Scrollytelling pages](scrolly.md)).
+
+## Next
+
+- [Images and data files](images-and-data.md)
+- [Exercises, solutions and explanations](exercises.md)

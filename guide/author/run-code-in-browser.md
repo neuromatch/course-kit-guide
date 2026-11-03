@@ -7,27 +7,35 @@ kernelspec:
 
 # Run code in the browser
 
-This book uses **JupyterLite** to run Python directly in your browser.
-No server, no installation required — everything runs via WebAssembly (WASM).
+For: author
 
-## How to run code in the browser
+Any page with a `kernelspec` runs its code in the reader's browser: no server and no installation. The kit uses JupyterLite (Python through Pyodide, WebAssembly), so each code cell becomes an editor with a **▶ Run** button.
 
-Every code cell on this page is an editor. Edit the code and press **▶ Run**
-(or Shift-Enter). The first run takes ~10 seconds while Python starts. Running a
-cell first runs the cells above it that haven't run yet, as in a notebook.
+## You write
 
-A heavy tutorial (for example one that needs PyTorch) can opt out with
-`runtime: colab` in its frontmatter. The page then shows its code read-only,
-with a banner that links to Colab and Kaggle.
+Write an ordinary `{code-cell}` on a page whose frontmatter declares `kernelspec`:
 
-## Try it: basic computation
+````text
+```{code-cell} python
+result = sum(range(1, 101))
+print(f"Sum of 1 to 100: {result}")
+```
+````
+
+A heavy tutorial (for example one that needs PyTorch) opts out with `runtime: colab` in its frontmatter. Its code is then shown read-only with a banner that links to Colab and Kaggle ([Page types](page-types.md)).
+
+## You get
+
+Every code cell below is an editor. Edit the code and press **▶ Run** (or Shift-Enter). The first run takes about ten seconds while Python starts. Running a cell first runs the cells above it that haven't run yet, as in a notebook.
+
+### Basic computation
 
 ```{code-cell} python
 result = sum(range(1, 101))
 print(f"Sum of 1 to 100: {result}")
 ```
 
-## Try it: NumPy in the browser
+### NumPy
 
 ```{code-cell} python
 import numpy as np
@@ -38,7 +46,7 @@ print(f"Mean: {arr.mean():.4f}")
 print(f"Std:  {arr.std():.4f}")
 ```
 
-## Try it: matplotlib in the browser
+### Matplotlib
 
 ```{code-cell} python
 import matplotlib.pyplot as plt
@@ -59,30 +67,15 @@ axes[1].set_title("Random normal samples")
 plt.tight_layout()
 ```
 
-## How JupyterLite is configured
+## Rules
 
-In `myst.yml`, the setting `project.jupyter.lite: true` enables the in-browser
-kernel for all pages that have a `kernelspec` in their frontmatter:
+- **Only pages with `kernelspec`** get editable, runnable cells. The kit's `extend:` file in `myst.yml` turns on `project.jupyter.lite`, which MyST needs to emit the in-browser kernel; keep it.
+- **One kernel per page.** Edits live in memory only (Reset restores the original). Changing page disposes the kernel; **Restart** starts a fresh one.
+- **Package limits.** `numpy`, `scipy`, `pandas`, `matplotlib` and `altair` are bundled; others need `micropip`; some packages (GPU `torch`) can't run at all. See [Browser limits and packages](../reference/browser-limits.md).
+- **Students who prefer Colab or Kaggle** use the badges that CI adds to every executable page and notebook ([Notebooks, branches and badges](../maintainer/notebooks-and-badges.md)). You never add badges by hand.
 
-```yaml
-project:
-  jupyter:
-    lite: true
-```
+## Next
 
-Pages without `kernelspec` (like `further_reading.md`) stay static — only pages
-that declare a `kernelspec` get editable, runnable cells.
-
-```{note}
-JupyterLite runs Python via Pyodide (WebAssembly). Core scientific packages
-(`numpy`, `scipy`, `pandas`, `matplotlib`, `altair`) are bundled and work out of
-the box. Others, like `ipywidgets`, are installed at runtime with `micropip`.
-Some packages, like GPU-backed `torch`, can't run in the browser at all.
-The Day 2 Bonus covers these limits and how to work around them.
-```
-
-## For students: running in Colab or Kaggle
-
-Every tutorial page with executable code has **Colab** and **Kaggle** badges at
-the top of the page and of its generated notebook. CI adds them automatically,
-so you never add them by hand. See Day 3, Tutorial 2 for how this works.
+- [Rich outputs](rich-outputs.md)
+- [Images and data files](images-and-data.md)
+- Reference: [Browser limits and packages](../reference/browser-limits.md)

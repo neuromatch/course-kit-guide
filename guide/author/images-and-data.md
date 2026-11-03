@@ -7,7 +7,45 @@ kernelspec:
 
 # Images and data files
 
-This tutorial demonstrates how to work with data files in your course using the `{nma-data}` directive.
+For: author
+
+Code that reads a file (`np.load`, `open`, ...) needs that file declared with `{nma-data}`, so the kit can embed it for the browser and fetch it in Colab and Kaggle notebooks. Images a page only *displays* need no declaration: reference them and the kit publishes them.
+
+## You write
+
+Declare the files your code reads, at the top level of the page. One path per line, each in `data/` or `images/` next to the page:
+
+````text
+:::{nma-data}
+data/spike_times.npz
+data/neuron_metadata.npz
+:::
+````
+
+Then read them with ordinary code, the same in the browser and in notebooks:
+
+````text
+```{code-cell} python
+import numpy as np
+spike_data = np.load('data/spike_times.npz', allow_pickle=True)
+```
+````
+
+Display an image by referencing it. No declaration needed:
+
+````text
+```{figure} images/experimental_setup.png
+:label: fig-setup
+:alt: Experimental setup schematic
+:width: 80%
+
+Our experimental pipeline.
+```
+````
+
+## You get
+
+This page declares its files and uses them below:
 
 ```{code-cell} python
 :tags: [remove-cell]
@@ -17,24 +55,10 @@ if sys.platform == "emscripten":  # only true in JupyterLite/Pyodide
     await micropip.install(["ipywidgets"])
 ```
 
-## Declaring Data Files
-
-The `{nma-data}` directive tells the course kit which files your **code reads** (`np.load`, `open`, ...):
-
 :::{nma-data}
 data/spike_times.npz
 data/neuron_metadata.npz
 :::
-
-This declaration:
-- **In the browser**: embeds files ≤2MB into the page (they load instantly from memory)
-- **In notebooks**: generates a hidden download cell that fetches them from GitHub
-
-Files must live in `data/` or `images/` inside your day's folder (the names come from `nma.assets.data` and `nma.assets.image`). Slide PDFs for `{nma-slides}` work the same way and live in `slides/`; see [Tutorial 4](videos-and-slides.md).
-
-## Using Images
-
-Images a page only **displays** need no declaration - just reference them. The kit publishes every image a page shows for the notebooks automatically, and embeds it for the browser:
 
 ```{figure} images/experimental_setup.png
 :label: fig-setup
@@ -44,11 +68,9 @@ Images a page only **displays** need no declaration - just reference them. The k
 Our experimental pipeline: stimulus presentation, neural recording, and spike train analysis.
 ```
 
-Only declare an image with `{nma-data}` if your code *reads* it (for example loading a PNG into an array). On the site the figure loads instantly from the embedded data; in generated notebooks the published image is fetched from GitHub.
+### Load the data
 
-## Loading Data
-
-Load the data the same way in both environments - normal NumPy works:
+Load the data the same way in the browser and in notebooks: normal NumPy works.
 
 ```{code-cell} python
 import numpy as np
@@ -62,7 +84,7 @@ print(f"Loaded {len(spike_data['trial_ids'])} trials")
 print(f"Loaded {len(spike_data['condition_ids'])} conditions")
 ```
 
-## Visualizing Spike Trains
+### Plot a raster
 
 Let's create a raster plot showing spike times for the first neuron across all trials:
 
@@ -87,7 +109,7 @@ ax.set_ylim(-1, n_trials)
 plt.tight_layout()
 ```
 
-## Computing Firing Rates
+### Compute firing rates
 
 Calculate mean firing rate by condition:
 
@@ -120,7 +142,7 @@ plt.colorbar(im, ax=ax, label='Firing Rate (Hz)')
 plt.tight_layout()
 ```
 
-## Interactive Exploration
+### Explore with a widget
 
 Use a widget to explore different neurons and conditions:
 
@@ -151,22 +173,13 @@ def explore_spikes(neuron, condition):
     plt.show()
 ```
 
-## Summary
+## Rules
 
-When adding data and images to your tutorials:
-
-1. **Create `data/` and/or `images/` folders** in your day's directory
-2. **Keep files small** (<2MB total) so they embed in browser pages
-3. **Declare the files your code reads** with `{nma-data}` at the top of the tutorial (images you only display need no declaration)
-4. **Reference normally** - images with `{figure}`, data with `np.load()` or similar
-5. **Validate** with `nma-kit check` before committing
-
-The kit automatically:
-- Embeds small files for instant browser loading
-- Generates download cells for Colab/Kaggle notebooks
-- Validates that your code references only declared files
-
-**Note:** This tutorial includes generation scripts (`generate_data.py`, `generate_schematic.py`) for reproducibility, but you don't need to commit generation scripts in your own courses - just commit the files themselves.
+- **Declare what code reads.** Only declare an image with `{nma-data}` if your code *reads* it (for example loading a PNG into an array).
+- **Keep files small.** On the site, files up to 2 MB are embedded for the page's editable cells; larger files are not.
+- **Where they live.** Files must be in `data/` or `images/` inside the page's folder (the names come from `nma.assets`, see [`nma:` settings](../reference/nma-config.md)). Slide PDFs for `{nma-slides}` live in `slides/` ([Videos, slides and feedback](videos-and-slides.md)).
+- **What `check` does.** It rejects references to missing images, undeclared files that code reads, and dynamic paths ([Rules enforced by `check`](../reference/check-rules.md#rules-assets)).
+- The generation scripts (`generate_data.py`, `generate_schematic.py`) beside this page are only for reproducibility. Commit the files themselves, not generation scripts, in your own course.
 
 ## Where files go
 
@@ -176,3 +189,9 @@ Keep a page's files next to it, in `images/`, `data/` and `slides/` folders (the
 - **Site-wide files** (a custom logo, extra CSS) go in a root `_static/` folder, which you create when needed (see [Branding and customising](../maintainer/branding.md)).
 - **On the site**, relative image paths just work.
 - **In the generated notebooks** (Colab and Kaggle), every image a page displays is copied to the notebooks branch automatically, and a download cell fetches the files you declare with `{nma-data}`. For any other file a notebook needs, use an absolute URL such as `https://raw.githubusercontent.com/<org>/<repo>/main/<folder>/<file>`. In the browser, fetch data with `pyodide.http.open_url` ([Browser limits and packages](../reference/browser-limits.md)), since Pyodide has no sockets.
+
+## Next
+
+- [Videos, slides and feedback](videos-and-slides.md)
+- [Figures, math and cross-references](figures-math-xrefs.md)
+- Reference: [`{nma-data}`](../reference/directives.md#nma-data)

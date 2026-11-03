@@ -4,6 +4,8 @@ title: "Browser limits and packages"
 
 # Browser limits and packages
 
+For: author (lookup)
+
 JupyterLite runs Python in the browser through Pyodide (WebAssembly). It needs no
 server, but not every package or workload can run there. This page covers how to
 get dependencies into the browser and what to do when something can't run there.
@@ -23,7 +25,7 @@ Pure-Python packages can be installed at runtime with `micropip`. Put the instal
 in a setup cell at the top of the tutorial and tag it `remove-cell` so students
 don't see it:
 
-````markdown
+````text
 ```{code-cell} python
 :tags: [remove-cell]
 import sys
@@ -76,7 +78,8 @@ Remove the workaround once the package publishes wheels upstream.
 
 ## The fallback: Colab and Kaggle
 
-Every executable tutorial automatically gets **Colab** and **Kaggle** badges that
-open the generated notebook (see Day 3, Tutorial 2). When a tutorial needs a GPU,
-heavy compute, or an unsupported package, point students to those badges. The
-tutorial is still written in `.md` like any other.
+Every executable page automatically gets **Colab** and **Kaggle** badges that
+open the generated notebook ([Notebooks, branches and badges](../maintainer/notebooks-and-badges.md)).
+When a page needs a GPU, heavy compute, or an unsupported package, set
+`runtime: colab` ([Frontmatter keys](frontmatter.md#runtime)) so students are sent
+to those badges. The page is still written in `.md` like any other.
