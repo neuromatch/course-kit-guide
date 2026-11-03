@@ -46,6 +46,8 @@ project:
         - file: guide/maintainer/branding.md
         - file: guide/maintainer/structure-and-scale.md
     - file: guide/instructor/index.md
+      children:
+        - file: guide/instructor/what-you-get.md
     - file: guide/reference/index.md
       children:
         - file: guide/reference/directives.md
