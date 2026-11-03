@@ -20,6 +20,7 @@ project:
         - file: guide/start/what-is-the-kit.md
     - file: guide/author/index.md
       children:
+        - file: guide/author/quick-start.md
         - file: guide/author/write-pages.md
         - file: guide/author/add-a-page.md
         - file: guide/author/figures-math-xrefs.md
@@ -31,6 +32,7 @@ project:
         - file: guide/author/videos-and-slides.md
         - file: guide/author/scrolly.md
         - file: guide/author/more-myst.md
+        - file: guide/author/fix-a-failing-check.md
     - file: guide/maintainer/index.md
       children:
         - file: guide/maintainer/create-a-course.md
