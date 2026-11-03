@@ -4,63 +4,93 @@ title: "More MyST: tabs, dropdowns and proofs"
 
 # More MyST: tabs, dropdowns and proofs
 
-## Tabbed content
+For: author
 
-Use tab-set to show alternative versions of the same content.
-In MyST, wrap tab-item directives inside a tab-set directive.
+MyST has more blocks than the course kit needs, and they all work in a course book. These are the ones authors reach for most: tabs, dropdowns, theorems, margin notes and footnotes. Each shows its source and then the result.
 
-Example syntax:
+## You write
 
-    ````{tab-set}
-    ```{tab-item} Python
-    print("Hello from Python")
-    ```
-    ```{tab-item} Julia
-    println("Hello from Julia")
-    ```
-    ````
+Tabs show alternative versions of the same content:
 
-## Dropdown (collapsible) blocks
+````text
+::::{tab-set}
+:::{tab-item} Python
+`print("Hello from Python")`
+:::
+:::{tab-item} Julia
+`println("Hello from Julia")`
+:::
+::::
+````
 
-Hide answers or supplementary details:
+A dropdown hides an answer students should try first:
 
-```{dropdown} Click to reveal the solution
+````text
+:::{dropdown} Click to reveal the answer
+Here is the answer.
+:::
+````
 
-Here is the solution to the exercise. Use dropdowns to hide answers that students
-should try themselves first.
-```
+A theorem with a label:
 
-## Proof environments
+````text
+:::{prf:theorem} Bayes theorem
+:label: thm-bayes
 
-To use proof environments, install the sphinx-proof extension.
-Add to myst.yml:
+$P(A|B) = \frac{P(B|A)\,P(A)}{P(B)}$
+:::
+````
 
-    project:
-      extensions:
-        - sphinx-proof
+A margin note, and a footnote:
 
-And add sphinx-proof to requirements.txt.
+````text
+:::{aside}
+:class: margin
+Margin notes appear in the gutter on wide screens.
+:::
 
-Then you can write:
+A sentence with a footnote[^fn1].
 
-    ```{prf:theorem} Bayes Theorem
-    :label: thm-bayes
+[^fn1]: The footnote text appears at the bottom of the page.
+````
 
-    P(A|B) = P(B|A) P(A) / P(B)
-    ```
+## You get
 
-## Margin notes
+::::{tab-set}
+:::{tab-item} Python
+`print("Hello from Python")`
+:::
+:::{tab-item} Julia
+`println("Hello from Julia")`
+:::
+::::
 
-Use the margin directive for asides, definitions, or links:
+:::{dropdown} Click to reveal the answer
+Here is the answer.
+:::
 
-```{margin}
-Margin notes appear in the right gutter on wide screens.
-```
+:::{prf:theorem} Bayes theorem
+:label: thm-bayes
 
-Main content continues here alongside the margin note.
+$P(A|B) = \frac{P(B|A)\,P(A)}{P(B)}$
+:::
 
-## Footnotes
+:::{aside}
+:class: margin
+Margin notes appear in the gutter on wide screens.
+:::
 
-Use standard Markdown footnote syntax[^fn1].
+A sentence with a footnote[^fn1].
 
-[^fn1]: This footnote appears at the bottom of the page.
+[^fn1]: The footnote text appears at the bottom of the page.
+
+## Rules
+
+- These are plain MyST. The course kit adds nothing to them and they need no extension.
+- Don't nest `{nma-solution}`, `{nma-explanation}`, `{nma-feedback}`, `{nma-instructor}` or `{nma-video}` inside a tab or a dropdown: they must be at the top level ([Directives](../reference/directives.md)).
+- For the full list of MyST blocks, see the [MyST directives reference](https://mystmd.org/guide/directives).
+
+## Next
+
+- [Write pages](write-pages.md)
+- [Exercises, solutions and explanations](exercises.md)

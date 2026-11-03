@@ -167,3 +167,12 @@ The kit automatically:
 - Validates that your code references only declared files
 
 **Note:** This tutorial includes generation scripts (`generate_data.py`, `generate_schematic.py`) for reproducibility, but you don't need to commit generation scripts in your own courses - just commit the files themselves.
+
+## Where files go
+
+Keep a page's files next to it, in `images/`, `data/` and `slides/` folders (the names are set by `nma.assets`, see [`nma:` settings](../reference/nma-config.md)). Paths are relative to the page.
+
+- **Beside the page.** With one or two files you can put them directly next to the page.
+- **Site-wide files** (a custom logo, extra CSS) go in a root `_static/` folder, which you create when needed (see [Branding and customising](../maintainer/branding.md)).
+- **On the site**, relative image paths just work.
+- **In the generated notebooks** (Colab and Kaggle), every image a page displays is copied to the notebooks branch automatically, and a download cell fetches the files you declare with `{nma-data}`. For any other file a notebook needs, use an absolute URL such as `https://raw.githubusercontent.com/<org>/<repo>/main/<folder>/<file>`. In the browser, fetch data with `pyodide.http.open_url` ([Browser limits and packages](../reference/browser-limits.md)), since Pyodide has no sockets.

@@ -1,84 +1,83 @@
 ---
 title: "Write pages"
-kernelspec:
-  name: python3
-  display_name: Python 3
 ---
 
 # Write pages
 
-MyST (Markedly Structured Text) is the markup language powering this book.
-It extends standard Markdown with directives and roles that produce rich,
-structured scientific content.
+For: author
 
-## Why MyST instead of notebooks?
+A page is a Markdown file in MyST, which extends standard Markdown with directives (blocks such as `{note}`) and roles (inline markup). Prose, admonitions and tables are plain text you write once; code cells run in the reader's browser. This page shows each form as source next to its result.
 
-MyST `.md` files are the **source of truth** for a course built with the kit. Jupyter notebooks
-(`.ipynb`) are generated automatically by CI — you never edit them by hand.
+## You write
 
-Benefits:
-- **Clean git diffs** — no output noise, no cell metadata churn
-- **Human-readable** — readable in any text editor
-- **Full Jupyter execution** at build time and in-browser via JupyterLite
+Everything standard Markdown supports works: **bold**, *italic*, `inline code`, [links](https://mystmd.org), lists and tables. Admonitions call out notes, tips and warnings:
 
-## Basic Markdown
-
-Everything standard Markdown supports works in MyST:
-
-- **Bold**, *italic*, `inline code`
-- [Links](https://mystmd.org)
-- Images: `![alt text](https://example.org/figure.png)`, or the `{image}` and `{figure}` directives (see Tutorial 3 for the differences and for local files)
-
-## Admonitions
-
-Use admonitions to call out notes, warnings, and exercises:
-
-```{note}
-This is a note admonition. Use it for supplementary information.
+```{include} ../examples/directives/markdown-basics.md
+:literal: true
+:lang: text
+:start-after: % region-start: admonition
+:end-before: % region-end: admonition
 ```
 
-```{warning}
-This is a warning. Use it to flag common mistakes.
+A table is a pipe table:
+
+```{include} ../examples/directives/markdown-basics.md
+:literal: true
+:lang: text
+:start-after: % region-start: table
+:end-before: % region-end: table
 ```
 
-```{admonition} Exercise 1.1
-:class: tip
+Executable code is a `{code-cell}`, and tags decide what the reader sees. A plain cell shows editor and output:
 
-Replace the text in this admonition with your own exercise prompt.
-Your students will see this highlighted block in the rendered book.
+```{include} ../examples/directives/code-cells.md
+:literal: true
+:lang: text
+:start-after: % region-start: code-cell
+:end-before: % region-end: code-cell
 ```
 
-## Code cells
+`hide-input` puts the code behind "Show code"; `remove-cell` hides the cell entirely:
 
-Add executable code with the `{code-cell}` directive:
-
-```{code-cell} python
-# This cell runs in JupyterLite (in the browser) or via myst build --execute
-message = "Hello from MyST!"
-print(message)
+```{include} ../examples/directives/code-cells.md
+:literal: true
+:lang: text
+:start-after: % region-start: hide-input
+:end-before: % region-end: hide-input
 ```
 
-## Hiding cells
-
-Tag cells to control visibility:
-
-```{code-cell} python
-:tags: [hide-input]
-# Students see the output but not this code
-import numpy as np
-print(f"pi = {np.pi:.6f}")
+```{include} ../examples/directives/code-cells.md
+:literal: true
+:lang: text
+:start-after: % region-start: remove-cell
+:end-before: % region-end: remove-cell
 ```
 
-```{code-cell} python
-:tags: [remove-cell]
-# This cell is completely hidden in the rendered book
-# Use it for setup code you do not want students to see
-pass
+## You get
+
+The same regions, rendered (source: [Markdown basics](../examples/directives/markdown-basics.md)):
+
+```{include} ../examples/directives/markdown-basics.md
+:start-after: % region-start: admonition
+:end-before: % region-end: admonition
 ```
 
-## Summary
+```{include} ../examples/directives/markdown-basics.md
+:start-after: % region-start: table
+:end-before: % region-end: table
+```
 
-- Write prose in plain Markdown
-- Use {code-cell} for executable code
-- Use admonitions to structure exercises and notes
-- Tag cells with hide-input or remove-cell to control what students see
+The code cells are live on the [Code cells example](../examples/directives/code-cells.md): edit one and press **▶ Run**. To learn how running works, see [Run code in the browser](run-code-in-browser.md).
+
+## Rules
+
+- A page with a `{code-cell}` needs `kernelspec` in its frontmatter ([Frontmatter keys](../reference/frontmatter.md#kernelspec)).
+- Tags: no tag shows editor and output; `hide-input` or `hide-cell` puts the code behind "Show code"; `remove-input` shows only the output; `remove-cell` removes the panel but still runs the cell as an earlier cell.
+- Exercise cells (an unfinished `raise NotImplementedError`) must have **no** tags, and need a solution ([Exercises, solutions and explanations](exercises.md)).
+- Edits to a cell live in the reader's browser only. Reset restores the original.
+
+## Next
+
+- [Figures, math and cross-references](figures-math-xrefs.md)
+- [Add a page](add-a-page.md)
+- Reference: [Rules enforced by `check`](../reference/check-rules.md)

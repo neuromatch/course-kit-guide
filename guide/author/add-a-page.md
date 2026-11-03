@@ -4,64 +4,52 @@ title: "Add a page"
 
 # Add a page
 
-The table of contents for your book lives entirely in `myst.yml` under `project.toc`.
-There is no auto-generation script — you edit it directly.
+For: author
 
-## The myst.yml TOC format
+A new page is a Markdown file under one of the course's content folders, plus one entry in the table of contents. The table of contents is a list in `myst.yml`; nothing generates it, so a page that is not listed in it does not appear in the sidebar.
 
-The toc is a list of files and sections:
+## You write
 
-    project:
-      toc:
-        - file: tutorials/intro.md
-        - file: tutorials/W1D1_MyTopic/chapter_intro.md
-          children:
-            - file: tutorials/W1D1_MyTopic/W1D1_Tutorial1.md
-            - file: tutorials/W1D1_MyTopic/further_reading.md
+A new file `guide/author/my-topic.md` (in your course, the folder is whichever one `nma.content` lists):
 
-Each day's `chapter_intro.md` is the parent entry, and its title becomes the day's
-label in the sidebar. Don't wrap it in a separate `title:` group. If you do, the day
-shows up twice in the sidebar, once as the group and once as the intro page.
+````text
+---
+title: "My topic"
+kernelspec:
+  name: python3
+  display_name: Python 3
+---
 
-## Logo and course title above the TOC
+# My topic
 
-The top of the sidebar, above the TOC, shows the site logo and a short title. Set
-them in `myst.yml` under `site.options`:
+Text and `{code-cell}` blocks go here.
+````
 
-    site:
-      options:
-        logo: _static/your_logo.svg
-        logo_dark: _static/your_logo_dark.svg   # optional, used in dark mode
-        logo_text: Your Course Title             # appears next to the logo
+Leave out `kernelspec` for a page without code. Then list the page in `project.toc` in `myst.yml`, under the section it belongs to:
 
-`logo_text` is the course name shown beside the logo — handy when the logo is an
-icon rather than a full wordmark. Leave it out to show the logo on its own.
-The default logo, colours and favicon come from the course kit (`nma-kit sync-assets`
-writes them to `_nma/`); see W1D3 Tutorial 3 for changing them.
+````text
+project:
+  toc:
+    - file: guide/author/index.md
+      children:
+        - file: guide/author/my-topic.md
+````
 
-## Naming convention
+## You get
 
-Follow the Neuromatch naming convention for all tutorial files:
+After you push, the page appears in the sidebar under its section parent, builds on the pull request preview, and (if it has a `kernelspec`) gets a student notebook, an instructor notebook and Colab and Kaggle badges.
 
-    tutorials/
-      W{week}D{day}_{TopicName}/
-        chapter_intro.md
-        W{week}D{day}_Tutorial1.md
-        W{week}D{day}_Tutorial2.md
-        W{week}D{day}_Tutorial3.md
-        W{week}D{day}_Bonus.md
-        further_reading.md
+## Rules
 
-For example: `tutorials/W2D3_ReinforcementLearning/W2D3_Tutorial1.md`
+- **Section parents.** Make the section's `index.md` the top-level entry and list its pages as `children`. Don't wrap it in a `title:` group: the section then appears twice in the sidebar, once as the group and once as the index page.
+- **File names matter.** The file name (without `.md`) names the generated notebook and its solution files. It also sets the default id prefix of feedback widgets (`W<week>D<day>_Tutorial1` becomes `W<week>D<day>_T1`; any other name is used as it is). Renaming a page that has feedback widgets changes those ids unless you set `feedback_prefix` ([Frontmatter keys](../reference/frontmatter.md#feedback-prefix)).
+- **Neuromatch Academy courses** name day folders `W<week>D<day>_<Topic>` with `W<week>D<day>_Tutorial<n>.md` pages. Other courses can use any names.
+- **Inside a content folder.** A page outside every folder listed in `nma.content` is ignored by the kit: no checks and no notebook ([`nma:` settings](../reference/nma-config.md#nma-content)).
+- **Static pages** (intros, further reading) have no `kernelspec`, so nothing runs and no notebook is made.
+- Run `uv run nma-kit check` before pushing ([Quick start](quick-start.md)).
 
-## Adding a new day
+## Next
 
-1. Create the folder: `tutorials/W2D1_MyNewTopic/`
-2. Create the files following the naming convention above
-3. Add an entry to `project.toc` in `myst.yml`
-4. Push to `main` — CI handles the rest
-
-## further_reading.md pages
-
-These are always static — no code execution. Simply omit the `kernelspec` from their
-frontmatter and the page gets no editable cells.
+- [Page types](page-types.md)
+- [Structure and scale](../maintainer/structure-and-scale.md) for sections and multi-week courses
+- Reference: [Frontmatter keys](../reference/frontmatter.md)
