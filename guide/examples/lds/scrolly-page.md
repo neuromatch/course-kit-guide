@@ -9,7 +9,7 @@ kernelspec:
 feedback_prefix: W2D1_T2
 ---
 
-This is the scrollytelling version of [Tutorial 1](normal-page.md): the same content, laid out as a pinned stage of figures, videos and live Python next to text cards that scroll past. Compare the two to decide which layout suits your material.
+This is the scrollytelling version of [the normal page](normal-page.md): the same content, laid out as a pinned stage of figures, videos and live Python next to text cards that scroll past. Compare the two to decide which layout suits your material.
 
 ```{code-cell} python
 :tags: [remove-cell]
@@ -146,7 +146,7 @@ def plot_specific_example_stream_plots(A_options):
 :::{step} hero
 :kicker: neuromatch academy
 :::
-# Tutorial 2: *Linear dynamical systems*
+# *Linear dynamical systems*
 
 ## Week 2, Day 3: Linear Systems
 
@@ -791,3 +791,5 @@ blue eigenvector but grows along the red eigenvector.
 * How to simulate the trajectory of a dynamical system specified by a differential equation $\dot{x} = f(x)$ using a forward Euler integration scheme.
 * The behavior of a one-dimensional linear dynamical system $\dot{x} = a x$ is determined by $a$, which may be a complex valued number. Knowing $a$, we know about the stability and oscillatory dynamics of the system.
 * The dynamics of high-dimensional linear dynamical systems $\dot{\mathbf{x}} = \mathbf{A} \mathbf{x}$ can be understood using the same intuitions, where we can summarize the behavior of the trajectories using the eigenvalues and eigenvectors of $\mathbf{A}$.
+
+**How it is built:** see [Scrollytelling pages](../../author/scrolly.md). **The same tutorial as a normal page:** [Linear dynamical systems (normal page)](normal-page.md).

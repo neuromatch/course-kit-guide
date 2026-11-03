@@ -17,7 +17,7 @@ if sys.platform == "emscripten":
 
 # Tutorial 1: Linear dynamical systems
 
-**Week 2, Day 3: Linear Systems**
+**Week 2, Day 3: Linear Systems** (the original Neuromatch Academy tutorial; this page shows it converted to MyST: [how](../../author/convert-a-notebook.md))
 
 **By Neuromatch Academy**
 
