@@ -1,75 +1,52 @@
 ---
 title: "Publish with CI"
-feedback_prefix: W1D3_T1
 ---
 
 # Publish with CI
 
-The build tooling (the MyST plugin, the `nma-kit` command and the GitHub
-Actions workflows) lives in the **Neuromatch course kit**, a separately
-versioned project, published as `@neuromatch/course-kit` on npm and
-`neuromatch-course-kit` on PyPI. Every course calls the kit's reusable
-workflows instead of carrying its own copy, and picks up kit fixes on its next
-build. The `@v0.3` in the workflow is the only version knob: the newest 0.3.x
-(compatible updates), or an exact tag such as `@v0.3.0` to freeze a finished
-course. The kit is still in development, so move to a new minor version on purpose:
-see [Starting a new course](create-a-course.md).
+For: maintainer
 
-A new course gets one workflow from `nma-kit init`, `.github/workflows/course.yml`.
-This book's own copy is included below, so the page always shows what actually runs.
+The build tooling (the MyST plugin, the `nma-kit` command and the GitHub Actions workflows) lives in the **Neuromatch course kit**, a separately versioned project published as `@neuromatch/course-kit` on npm and `neuromatch-course-kit` on PyPI. Your course calls the kit's reusable workflows instead of carrying its own copy, and picks up kit fixes on its next build. `nma-kit init` writes one workflow, `.github/workflows/course.yml`. This guide's own copy is below, so the page always shows what actually runs.
 
-## What runs, and when
-
-**On a pull request**, the workflow checks your changes without publishing anything:
-
-1. `nma-kit check` validates the content rules: no `.ipynb` files in
-   `tutorials/`, every page with code cells has a `kernelspec`, every
-   `{nma-video}`/`{nma-slides}` directive is valid (and every `:path:` PDF exists), every exercise has an
-   `{nma-solution}`, and the `nma:` settings in `myst.yml` are well formed.
-2. `nma-kit notebooks --dry-run` checks that every executable page converts.
-3. `nma-kit render-scrolly` runs every scrollytelling page
-   (`layout: scrolly`, see [W1D2 Tutorial 6](../author/exercises.md))
-   headless. A cell that raises fails the check.
-4. The whole site is built, so a broken page fails the check too.
-
-**On a push to `main`**, the same steps run for real, in order, each one only if
-the previous one passed:
-
-1. `nma-kit check`
-2. `nma-kit notebooks` converts each executable `.md` tutorial to `.ipynb`,
-   adds a Colab/Kaggle badge cell, turns `{nma-video}`/`{nma-slides}` and
-   `{nma-feedback}` into notebook cells, and splits `{nma-solution}`/
-   `{nma-explanation}` into a student notebook (links) and an instructor
-   notebook (answers inline), plus the solution files. `{nma-instructor}` notes
-   are dropped, and `{nma-data}` files and `{nma-slides}` PDFs are copied next to
-   the notebooks.
-3. `nma-kit publish-notebooks` pushes `notebooks/` to the separate
-   `notebooks-branch`. The branch is created the first time, so a new
-   course works on its first push.
-4. `nma-kit render-scrolly` pre-renders the scrollytelling pages, so readers
-   see real figures before they start Python.
-5. `nma-kit prepare-site` adds Colab/Kaggle badges to the executable pages and,
-   on pages with exercises, a hidden setup cell so "Run all" doesn't stop at an
-   unfinished exercise. This only happens in CI's temporary checkout.
-6. `myst build --html` builds the book, then `nma-kit finalize-site` fixes its
-   `robots.txt` and sitemap, and the next job deploys it to GitHub Pages.
-7. Optionally, the same course is built a second time as the
-   [instructor site](instructor-site.md) and deployed to Cloudflare Pages.
-
-**On a pull request**, the `preview` job (optional, needs Cloudflare Pages) also
-builds the PR and deploys it to `https://pr-<number>.<project>.pages.dev`, with an
-instructor preview too when the instructor site is on.
-
-Generated notebooks are never committed to `main`, which keeps `main` free of
-generated files and avoids CI commit loops. Videos, slides, solution links and
-feedback widgets need no extra step: the course kit's MyST plugin renders them
-during `myst build`.
+## You write
 
 ```{literalinclude} ../../.github/workflows/course.yml
 :language: yaml
 ```
 
-## Running the same steps locally
+The `@v0.4` is the only version knob in the workflow: the newest 0.4.x (compatible updates), or an exact tag such as `@v0.4.0` to freeze a finished course. Move to a new minor version on purpose ([Create a course](create-a-course.md#getting-kit-updates)).
+
+In the repository, go to **Settings → Pages**, set **Source** to `GitHub Actions`, and push any change to `main` to trigger the first build. The book goes live at `https://<your-org>.github.io/<your-repo>/`. To use a custom domain, set it under **Settings → Pages → Custom domain**; with the GitHub Actions source no `CNAME` file is needed.
+
+## You get
+
+**On a pull request**, the workflow checks your changes without publishing anything:
+
+1. `nma-kit check` validates the content rules ([Rules enforced by `check`](../reference/check-rules.md)).
+2. `nma-kit notebooks --dry-run` checks that every executable page converts.
+3. `nma-kit render-scrolly` runs every scrollytelling page headless. A cell that raises fails the check.
+4. The whole site is built, so a broken page fails the check too.
+
+If previews are on, a `preview` job also builds the pull request and deploys it ([Pull request previews](pr-previews.md)).
+
+**On a push to `main`**, the same steps run for real, in order, each one only if the previous one passed:
+
+1. `nma-kit check`.
+2. `nma-kit notebooks` converts each executable `.md` page to `.ipynb`, adds a Colab/Kaggle badge cell, turns `{nma-video}`, `{nma-slides}` and `{nma-feedback}` into notebook cells, and splits `{nma-solution}` and `{nma-explanation}` into a student notebook (links) and an instructor notebook (answers inline), plus the solution files. `{nma-instructor}` notes are dropped, and `{nma-data}` files and `{nma-slides}` PDFs are copied next to the notebooks.
+3. `nma-kit publish-notebooks` pushes `notebooks/` to the separate `notebooks-branch`. The branch is created the first time, so a new course works on its first push.
+4. `nma-kit render-scrolly` pre-renders the scrollytelling pages, so readers see real figures before they start Python.
+5. `nma-kit prepare-site` adds Colab/Kaggle badges to the executable pages and, on pages with exercises, a hidden setup cell so "Run all" doesn't stop at an unfinished exercise. This happens only in CI's temporary checkout.
+6. `myst build --html` builds the book, then `nma-kit finalize-site` fixes its `robots.txt` and sitemap, and the next job deploys it to GitHub Pages.
+7. Optionally, the same course is built a second time as the [instructor site](instructor-site.md) and deployed to Cloudflare Pages.
+
+Generated notebooks are never committed to `main`, which keeps `main` free of generated files and avoids CI commit loops. Videos, slides, solution links and feedback widgets need no extra step: the kit's MyST plugin renders them during `myst build`.
+
+## Rules
+
+- One publish runs at a time, and each step runs only if the previous one passed.
+- Pull requests never publish anything to the live site.
+- The notebooks branch must be public (Colab and Kaggle read raw GitHub URLs).
+- To run the same steps locally:
 
 ```bash
 uv venv && uv pip install -r requirements.txt neuromatch-course-kit
@@ -79,12 +56,11 @@ uv run nma-kit notebooks --dry-run
 uv run myst start
 ```
 
-## Setting up GitHub Pages
+`prepare-site` edits `.md` files in place and is meant for CI only; if you run it locally, revert with `git checkout -- <your content folders> myst.yml`.
 
-1. Go to your repo **Settings → Pages**
-2. Set **Source** to `GitHub Actions`
-3. Push any change to `main` to trigger the first build
+## Next
 
-Your book will be live at `https://<your-org>.github.io/<your-repo>/`. To use a
-custom domain, set it under **Settings → Pages → Custom domain**; with the
-GitHub Actions source no `CNAME` file is needed.
+- [Pull request previews](pr-previews.md)
+- [Notebooks, branches and badges](notebooks-and-badges.md)
+- [Instructor site](instructor-site.md)
+- Reference: [`nma-kit` commands](../reference/cli.md)

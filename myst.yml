@@ -40,6 +40,7 @@ project:
       children:
         - file: guide/maintainer/create-a-course.md
         - file: guide/maintainer/publish-with-ci.md
+        - file: guide/maintainer/pr-previews.md
         - file: guide/maintainer/notebooks-and-badges.md
         - file: guide/maintainer/instructor-site.md
         - file: guide/maintainer/branding.md

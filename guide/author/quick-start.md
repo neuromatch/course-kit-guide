@@ -9,7 +9,7 @@ For: author
 Change a page, open a pull request, and read the result on the preview the build creates for you. You need write access to the course repository and nothing installed on your computer.
 
 ```{note}
-The preview link needs pull request previews, which the course maintainer turns on once (Cloudflare Pages, same-repository pull requests only). If your pull request gets no preview comment, ask your maintainer to enable them: see [Publish with CI](../maintainer/publish-with-ci.md). Without previews you still get the check result (tier 2 below).
+The preview link needs pull request previews, which the course maintainer turns on once (Cloudflare Pages, same-repository pull requests only). If your pull request gets no preview comment, ask your maintainer to enable them: see [Pull request previews](../maintainer/pr-previews.md). Without previews you still get the check result (tier 2 below).
 ```
 
 ## You write
