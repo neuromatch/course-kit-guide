@@ -1,7 +1,9 @@
 ---
-title: For instructors
+title: "For instructors"
 ---
 
 # For instructors
 
-Pages for instructors and TAs who use the instructor site and notebooks.
+Pages for instructors and TAs.
+
+- [What instructors get](what-you-get.md): the instructor site and notebooks
