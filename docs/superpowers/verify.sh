@@ -3,7 +3,7 @@
 # on a scratch copy of the repo, so the working tree is never touched.
 #   SKIP_STALE=1  skip the stale-name grep (until the last rewrite tasks)
 set -uo pipefail
-ROOT=$(cd "$(dirname "$0")/../.." && pwd)
+export ROOT=$(cd "$(dirname "$0")/../.." && pwd)
 W=/tmp/verify
 KIT_VERSION=$("$ROOT/.venv/bin/nma-kit" --version | awk '{print $2}')
 fail=0
@@ -65,6 +65,31 @@ print("\n".join(bad))
 sys.exit(1 if bad else 0)
 PY
 fi
+
+# Region markers used by {include} blocks must exist exactly once in the target file.
+say "region markers"
+python3 - <<'PY' || fail=1
+import re, sys, pathlib
+root = pathlib.Path(__import__("os").environ["ROOT"])
+bad = []
+block = re.compile(r"```\{include\}\s+(\S+)\n((?::[a-z-]+:.*\n)+)")
+for f in sorted((root / "guide").rglob("*.md")):
+    for m in block.finditer(f.read_text()):
+        target = (f.parent / m.group(1)).resolve()
+        opts = dict(re.findall(r":([a-z-]+):\s*(.*)", m.group(2)))
+        for key in ("start-after", "end-before"):
+            if key not in opts:
+                continue
+            marker = opts[key].strip()
+            if not target.exists():
+                bad.append(f"{f.relative_to(root)}: include target {m.group(1)} does not exist")
+                break
+            n = len(re.findall(r"^" + re.escape(marker) + r"\s*$", target.read_text(), flags=re.M))
+            if n != 1:
+                bad.append(f"{f.relative_to(root)}: marker {marker!r} occurs {n} times in {m.group(1)}")
+print("\n".join(bad))
+sys.exit(1 if bad else 0)
+PY
 
 say "result"; [ $fail -eq 0 ] && echo GREEN || echo RED
 exit $fail
