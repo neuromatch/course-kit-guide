@@ -19,7 +19,7 @@ uv run nma-kit init --title "My Course" --author "Your Name" \
 The result is a small starter (`myst.yml`, the CI workflow, one example day, a
 setup checklist) with no history and no link to this repo. The CI logic, the
 MyST plugin and the `nma-kit` CLI all come from the kit, so your course gets
-fixes through the version in `course.yml` (`@v0.3`) and `extend:` in `myst.yml`.
+fixes through the version in `course.yml` (`@v0.4`) and `extend:` in `myst.yml`.
 See ["Starting a new course"](https://neuromatch.github.io/course-kit-guide/tutorials/new_course)
 for the full walkthrough.
 

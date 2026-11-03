@@ -1,8 +1,8 @@
 version: 1
 # The Neuromatch course kit: adds the MyST plugin ({nma-video}, {nma-solution},
-# editable cells, scrolly pages, ...) and turns on JupyterLite. @0.3 = newest
-# 0.3.x; CI pins it to the exact version of the workflow's kit release.
-extend: https://cdn.jsdelivr.net/npm/@neuromatch/course-kit@0.3/dist/nma.yml
+# editable cells, scrolly pages, ...) and turns on JupyterLite. @0.4 = newest
+# 0.4.x; CI pins it to the exact version of the workflow's kit release.
+extend: https://cdn.jsdelivr.net/npm/@neuromatch/course-kit@0.4/dist/nma.yml
 project:
   title: Neuromatch Course Guide
   authors:
@@ -73,6 +73,11 @@ site:
 # (MyST logs "extra key ignored: nma", which is expected).
 # Use `key: value` entries with string values; `nma-kit check` rejects numbers, lists and deeper nesting.
 nma:
+  # The folders that hold your pages: the kit checks them and builds notebooks from
+  # them (required since kit 0.4). Pages outside these folders are ignored by the kit.
+  content:
+    - tutorials
+    - projects
   # Branding (optional). Override the kit's colours and/or append your own CSS:
   #   brand:
   #     primary: "#D9480F"
