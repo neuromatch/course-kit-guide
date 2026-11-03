@@ -11,3 +11,5 @@ node_modules/
 .pytest_cache/
 *.log
 notebooks/
+docs/superpowers/
+.superpowers/

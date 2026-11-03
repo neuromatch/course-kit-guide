@@ -48,7 +48,4 @@ For scrollytelling pages, run `uv run nma-kit render-scrolly` first so their
 panels show real outputs. Pushes to `main` publish the site; pull requests are
 checked and, with the Cloudflare settings in place, previewed.
 
-`docs/superpowers/verify.sh` runs every gate on a scratch copy (check, notebooks,
-scrolly rendering, site build, stale-name and link checks).
-
 Agents and contributors: see `AGENTS.md` for the authoring conventions.
