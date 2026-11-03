@@ -51,6 +51,14 @@ Today, the focus will be on **linear dynamics**, where $f(x)$ is a linear functi
 :osf: snv4m
 :::
 
+:::{nma-instructor}
+This is a test
+:::
+
+```{code-cell} python
+print("Hello World!")
+```
+
 ---
 # Setup
 
