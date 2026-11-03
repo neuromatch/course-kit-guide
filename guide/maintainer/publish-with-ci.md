@@ -14,7 +14,7 @@ The build tooling (the MyST plugin, the `nma-kit` command and the GitHub Actions
 :language: yaml
 ```
 
-The `@v0.4` is the only version knob in the workflow: the newest 0.4.x (compatible updates), or an exact tag such as `@v0.4.0` to freeze a finished course. Move to a new minor version on purpose ([Create a course](create-a-course.md#getting-kit-updates)).
+The `@v0.4` is the only version knob in the workflow: the newest 0.4.x (compatible updates), or an exact tag such as `@v0.4.0` to freeze a finished course. Move to a new minor version on purpose ([Upgrade the kit](upgrade-the-kit.md)).
 
 In the repository, go to **Settings → Pages**, set **Source** to `GitHub Actions`, and push any change to `main` to trigger the first build. The book goes live at `https://<your-org>.github.io/<your-repo>/`. To use a custom domain, set it under **Settings → Pages → Custom domain**; with the GitHub Actions source no `CNAME` file is needed.
 

@@ -37,6 +37,44 @@ if grep '⛔' build.log | grep -v 'Could not find DOI' | grep -v 'Unsupported im
   echo "FAILED: build errors above"; fail=1
 fi
 
+# Every page under guide/ must be in project.toc, and every toc entry must exist.
+say "toc coverage"
+"$ROOT/.venv/bin/python" - <<'PY' || fail=1
+import pathlib, sys, yaml
+toc = yaml.safe_load(open("myst.yml"))["project"]["toc"]
+listed = set()
+def walk(nodes):
+    for n in nodes:
+        listed.add(n["file"]); walk(n.get("children", []))
+walk(toc)
+files = {str(p) for p in pathlib.Path("guide").rglob("*.md")}
+for label, items in (("not in project.toc", sorted(files - listed)), ("in project.toc but missing", sorted(listed - files))):
+    for i in items:
+        print(f"{i}: {label}")
+sys.exit(1 if (files ^ listed) else 0)
+PY
+
+# Links with a #fragment must point at an id that exists in the built page.
+say "anchors"
+python3 - <<'PY' || fail=1
+import re, sys, pathlib
+html = pathlib.Path("_build/html")
+bad, cache = [], {}
+def ids(page):
+    rel = page.with_suffix("")
+    p = html / (rel.parent if rel.name == "index" else rel) / "index.html"
+    return set(re.findall(r'id="([^"]+)"', p.read_text())) if p.exists() else None
+for f in sorted(pathlib.Path("guide").rglob("*.md")):
+    text = re.sub(r"^(````*|~~~+).*?^\1\s*$", "", f.read_text(), flags=re.S | re.M)
+    for m in re.finditer(r"\]\(([^)\s#]+\.md)#([^)\s]+)\)", text):
+        tgt = (f.parent / m.group(1)).resolve().relative_to(pathlib.Path(".").resolve())
+        cache.setdefault(tgt, ids(tgt))
+        if cache[tgt] is None or m.group(2) not in cache[tgt]:
+            bad.append(f"{f}: {m.group(1)}#{m.group(2)}")
+print("\n".join(bad))
+sys.exit(1 if bad else 0)
+PY
+
 if [ -z "${SKIP_STALE:-}" ]; then
   say "stale names"
   cd "$ROOT"

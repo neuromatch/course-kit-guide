@@ -18,6 +18,7 @@ project:
     - file: guide/start/index.md
       children:
         - file: guide/start/what-is-the-kit.md
+        - file: guide/start/which-path.md
     - file: guide/author/index.md
       children:
         - file: guide/author/quick-start.md
