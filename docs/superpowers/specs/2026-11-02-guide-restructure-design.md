@@ -150,8 +150,15 @@ Decision:
   are page-level layouts. The feature page links to the demo and literal-includes the
   relevant part of its source.
 
-To verify in phase 0: the `:start-after:` / `:end-before:` region include on a `.md`
-file (not yet tested), and that example pages with `kernelspec` generate notebooks.
+Phase 0 results (kit 0.4.0, mystmd 1.12.0):
+- A `{include}` with `:literal:`, `:start-after:` and `:end-before:` works on a `.md`
+  file. Markers are MyST comment lines (`% region-start: <name>` /
+  `% region-end: <name>`); the marker lines are not shown, and the value is exactly the
+  region, including a top-level `{nma-solution}` or a `{code-cell}`.
+- An example page with `kernelspec`, a real top-level exercise, solution and region
+  markers passes `nma-kit check` and generates its notebook and solution file. The
+  feature page that literal-includes it (no `kernelspec`) also passes `check`.
+- 0.4.0's only other change is the `nma.content` breaking change already planned for.
 
 ## 7. Layout and naming
 
@@ -285,8 +292,8 @@ kit's `nma.yml` copied from npm (`npm pack @neuromatch/course-kit@0.4.0`) as in 
 
 ## 11. Open decisions (my defaults)
 
-1. **Old URLs.** Default: accept the break (young site) unless redirects are
-   supported (checked in phase 0).
+1. **Old URLs.** Decided: accept the break. mystmd 1.12 has no site redirect option
+   and GitHub Pages has no server-side redirects; the PR description says so.
 2. **One root or one per section.** Default: one `guide` root. The alternative is a
    root per section (`{name: author, path: guide/author}` and so on) for
    audience-named notebook folders; it costs more config and gains little.
