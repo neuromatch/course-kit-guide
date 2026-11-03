@@ -30,6 +30,8 @@ project:
         - file: guide/author/images-and-data.md
         - file: guide/author/exercises.md
         - file: guide/author/videos-and-slides.md
+        - file: guide/author/feedback.md
+        - file: guide/author/instructor-notes.md
         - file: guide/author/scrolly.md
         - file: guide/author/more-myst.md
         - file: guide/author/fix-a-failing-check.md
@@ -58,6 +60,9 @@ project:
             - file: guide/examples/directives/markdown-basics.md
             - file: guide/examples/directives/code-cells.md
             - file: guide/examples/directives/video-and-slides.md
+            - file: guide/examples/directives/exercise.md
+            - file: guide/examples/directives/feedback.md
+            - file: guide/examples/directives/instructor.md
         - file: guide/examples/lds/normal-page.md
         - file: guide/examples/lds/scrolly-page.md
         - file: guide/examples/colab/heavy-compute.md
