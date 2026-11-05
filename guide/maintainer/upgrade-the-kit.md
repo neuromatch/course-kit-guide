@@ -27,6 +27,10 @@ Then run `uv run nma-kit sync-assets` (the branding changes between versions) an
 - The kit's newest 0.4.x on every build, with no change in your repository.
 - A failing `nma-kit check` that names exactly what to change when a minor version tightens a rule.
 
+### From 0.4.0 to 0.4.1
+
+0.4.1 changes nothing you have to do: it adds the optional [scheduled notebook runs](scheduled-runs.md). To use them, upgrade the local package, then copy the kit's `nightly.yml` to `.github/workflows/nightly.yml` (it is not part of `nma-kit init`) and commit it to the default branch. Courses on `@v0.4` already run 0.4.1 on CI.
+
 ### From 0.3 to 0.4
 
 0.4.0 has one breaking change: `nma.paths.tutorials` and `nma.paths.projects` are no longer read, and `nma.content` is required.

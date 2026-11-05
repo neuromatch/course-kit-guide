@@ -33,6 +33,7 @@ notebooks/                   # Generated files (gitignored, lives on notebooks-b
                              #   guide/<folder>/<page>.ipynb, .../instructor/<page>.ipynb, .../solutions/*
 .github/workflows/
   course.yml                 # Calls the kit's reusable workflows: PR check; on main: notebooks -> notebooks-branch, site -> Pages
+  nightly.yml                # Copy of the kit's templates/nightly.yml: nightly (browser) and weekly (runtime: colab) runs of the instructor notebooks in the Colab image; failures go to one `course-nightly` issue
   wheels.yml                 # Manual: build Pyodide wheels into _wheels/ (kit workflow)
 ```
 
@@ -41,7 +42,7 @@ Pages outside a folder listed in `nma.content` are ignored by the kit (no checks
 ### Key files
 
 - **`myst.yml`** -- the only config file. Contains project metadata, hand-authored TOC, the kit's config (`extend: https://cdn.jsdelivr.net/npm/@neuromatch/course-kit@0.4/dist/nma.yml`, which adds the plugin and `project.jupyter.lite: true`), site theme, and the top-level `nma:` block (settings read by the course kit, not by MyST, which logs `extra key ignored: nma`). There is no `_toc.yml` or `_config.yml`.
-- **`nma-kit`** -- the course kit CLI, run from the repo root: `check` (content rules below), `notebooks` (student/instructor notebooks and solution files, badges from `project.github`), `render-scrolly`, `prepare-site` (CI only: badges + run-all fallback cell in the `.md` pages), `publish-notebooks`, `finalize-site` (CI only: `robots.txt`, no sitemap, `noindex` for the instructor site), `sync-assets`, `init`.
+- **`nma-kit`** -- the course kit CLI, run from the repo root: `check` (content rules below), `notebooks` (student/instructor notebooks and solution files, badges from `project.github`), `render-scrolly`, `run-notebooks` (kit >= 0.4.1, the scheduled run), `prepare-site` (CI only: badges + run-all fallback cell in the `.md` pages), `publish-notebooks`, `finalize-site` (CI only: `robots.txt`, no sitemap, `noindex` for the instructor site), `sync-assets`, `init`.
 - **`.github/workflows/course.yml`** -- calls the kit's reusable workflows (`@v0.4`), which install the matching `neuromatch-course-kit` and run the `nma-kit` steps (see "Build & CI").
 - **`requirements.txt`** -- the packages the pages import (numpy, matplotlib, ...). The tooling (mystmd, pinned by the kit; jupytext; nbclient) comes from the course kit.
 - **`.nvmrc`** -- Node.js version (22). MyST requires Node >= 20.
@@ -311,6 +312,7 @@ Kit tests run in the kit repo; see its `AGENTS.md`.
 - **Pull request previews** (`course-preview.yml`, the `preview` job in `course.yml`): builds the PR like a publish, pushes its notebooks to `notebooks-pr-<n>` (every badge and link follows that branch), deploys the site to Cloudflare Pages as `https://pr-<n>.<project>.pages.dev` and keeps one comment with the link. Closing the PR deletes the branch and deployments. Same-repository PRs only. Needs secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` and variable `CLOUDFLARE_PROJECT`; without them the deploy is skipped. With `CLOUDFLARE_INSTRUCTOR_PROJECT` set it also deploys an instructor preview (see "Instructor notes and the instructor site").
 - **Push to `main`** (`course-publish.yml`): `nma-kit check` -> `nma-kit notebooks` -> `nma-kit publish-notebooks` (to `notebooks-branch`, created if missing) -> `render-scrolly` -> `prepare-site` -> `myst build --html` -> `finalize-site` -> deploy to GitHub Pages. Each step runs only if the previous one passed, and one publish runs at a time.
 - GitHub Pages: Settings -> Pages -> Source: GitHub Actions (custom domain set there; no CNAME copy step).
+- **Scheduled runs** (`nightly.yml`, kit >= 0.4.1): keep it identical to the kit's `templates/nightly.yml` (the guide page `guide/maintainer/scheduled-runs.md` includes it with `literalinclude`). Every night the `runtime: browser` pages, every Sunday the `runtime: colab` ones (CPU: a failure there is `needs-check`, not red). Needs Issues enabled; scheduled workflows only run from `main`.
 - Pyodide wheels: `.github/workflows/wheels.yml` (manual) calls the kit's `course-wheels.yml` and commits wheels to `_wheels/`.
 
 ### Adding a page

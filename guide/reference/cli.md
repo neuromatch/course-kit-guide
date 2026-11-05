@@ -13,6 +13,7 @@ For: author and maintainer (lookup)
 | [`check`](#cmd-check) | Authors, CI | Validate content and `myst.yml` |
 | [`notebooks`](#cmd-notebooks) | Maintainers, CI | Generate student and instructor notebooks and solution files |
 | [`render-scrolly`](#cmd-render-scrolly) | Authors, CI | Run scrolly pages and save their outputs |
+| [`run-notebooks`](#cmd-run-notebooks) | Maintainers, CI | Run the generated instructor notebooks and report which broke |
 | [`sync-assets`](#cmd-sync-assets) | Authors, maintainers | Write the site branding to `_nma/` |
 | [`init`](#cmd-init) | Maintainers, once | Write a starter course |
 | [`prepare-site`](#cmd-prepare-site) | **CI only** | Prepare the `.md` pages for `myst build` |
@@ -45,6 +46,16 @@ uv run nma-kit render-scrolly
 ```
 
 Runs each scrolly page's instructor notebook (exercise cells removed, `# @param` at defaults) and writes `_build/scrolly/<root>/<folder>/<page>.json` (`<root>` is the name of the content folder) with each cell's output. A cell that raises fails the command with `file:line`. Run it before `myst start` so scrolly panels show real outputs.
+
+(cmd-run-notebooks)=
+## `run-notebooks`
+
+```bash
+uv run nma-kit notebooks
+uv run nma-kit run-notebooks [--runtime browser|colab] [--notebook PATH] [--timeout SECONDS] [--report FILE.json]
+```
+
+Runs the instructor notebooks that `notebooks` generated (solutions filled in) and prints one state per notebook: `passed`, `failed`, `timeout` or `needs-check` (a `runtime: colab` page that failed or timed out, to be confirmed in Colab with a GPU). `--runtime` limits the run to pages with that runtime, `--notebook` runs a single file, `--timeout` is the budget for one whole notebook (default 1200 seconds) and `--report` also writes the results as JSON. Exits 1 if a notebook failed or timed out, and 0 otherwise. `--list` and `--targets` are used by the scheduled workflow to split the notebooks into parallel jobs. It runs the notebooks in your own Python; the nightly CI job runs them in Colab's image. See [Scheduled notebook runs](../maintainer/scheduled-runs.md). Needs kit 0.4.1 or newer.
 
 (cmd-sync-assets)=
 ## `sync-assets`
