@@ -61,6 +61,7 @@ uv run myst start
 ## Next
 
 - [Pull request previews](pr-previews.md)
+- [Scheduled notebook runs](scheduled-runs.md)
 - [Notebooks, branches and badges](notebooks-and-badges.md)
 - [Instructor site](instructor-site.md)
 - Reference: [`nma-kit` commands](../reference/cli.md)

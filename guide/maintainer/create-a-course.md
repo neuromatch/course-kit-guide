@@ -41,6 +41,7 @@ The feedback settings (`nma.feedback`) are commented out. Feedback widgets post 
 - Read the example day, replace it with your own, and update `project.toc` ([Structure and scale](structure-and-scale.md)).
 - Preview locally with `uv run nma-kit sync-assets && uv run myst start`, then push to `main`. Authors usually work through pull requests ([Quick start](../author/quick-start.md)).
 - Optional: turn on [pull request previews](pr-previews.md) and the [instructor site](instructor-site.md), both of which need Cloudflare Pages.
+- Optional: add the [scheduled notebook runs](scheduled-runs.md), a second workflow file that `init` does not write.
 
 Keep the kit current: see [Upgrade the kit](upgrade-the-kit.md).
 

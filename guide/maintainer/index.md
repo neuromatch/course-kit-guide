@@ -10,6 +10,7 @@ Pages for people who create, publish and run a course repository.
 - [Publish with CI](publish-with-ci.md): GitHub Pages and the workflow
 - [Pull request previews](pr-previews.md): a live preview of every pull request
 - [Notebooks, branches and badges](notebooks-and-badges.md): how the notebooks are made and published
+- [Scheduled notebook runs](scheduled-runs.md): nightly and weekly checks in the Colab environment
 - [Instructor site](instructor-site.md): solutions and notes inline, on a second address
 - [Branding and customising](branding.md): title, colours, logo and CSS
 - [Structure and scale](structure-and-scale.md): table of contents, content folders, many weeks

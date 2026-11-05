@@ -30,6 +30,7 @@ This guide has a path for each kind of reader. Pick the one that matches what yo
 
 - [Create a course](../maintainer/create-a-course.md) with `nma-kit init`.
 - [Publish with CI](../maintainer/publish-with-ci.md) and turn on [pull request previews](../maintainer/pr-previews.md).
+- Catch broken tutorials early with [scheduled notebook runs](../maintainer/scheduled-runs.md).
 - [Set up the instructor site](../maintainer/instructor-site.md).
 - [Change branding](../maintainer/branding.md) and [upgrade the kit](../maintainer/upgrade-the-kit.md).
 
